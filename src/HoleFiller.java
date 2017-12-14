@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import static org.opencv.core.CvType.CV_64FC1;
@@ -14,6 +15,7 @@ public class HoleFiller {
     public BufferedImage img;
     public Mat mat;
     public MatOfDouble scaledMat;
+    public Hole hole;
 
     public HoleFiller(String imgPath) {
 //        this.loadGrayScaleImg(imgPath);
@@ -73,49 +75,76 @@ public class HoleFiller {
         }
     }
 
-    public static HashSet<Index> getHoleBounderies(MatOfDouble m) {
-        HashSet<Index> idxs = new HashSet<>();
-        double HOLE_VALUE = -1.0;
+    public static Hole getHoleBounderies(Mat m) {
+        ArrayList<Index> holeArrayList = new ArrayList<>();
+        HashSet<Index> bounderiesSet = new HashSet<>();
 
         for (int i = 0; i < m.rows(); i++) {
             for (int j = 0; j < m.cols(); j++) {
-                int jPrev = (j > 0) ? j - 1 : j;
-                int iPrev = (i > 0) ? i - 1 : i;
-
-                if (m.get(i, jPrev)[0] != HOLE_VALUE && m.get(i, j)[0] == HOLE_VALUE) {
-                    idxs.add(new Index(i, jPrev));
-                } else if (m.get(i, jPrev)[0] == HOLE_VALUE && m.get(i, j)[0] != HOLE_VALUE) {
-                    idxs.add(new Index(i, j));
-                }
-                if (m.get(iPrev, j)[0] != HOLE_VALUE && m.get(i, j)[0] == HOLE_VALUE) {
-                    idxs.add(new Index(iPrev, j));
-                } else if (m.get(iPrev, j)[0] == HOLE_VALUE && m.get(i, j)[0] != HOLE_VALUE) {
-                    idxs.add(new Index(i, j));
-                }
+                checkMissingPixel(i, j, m, holeArrayList);
+                checkBounderyPixel(i, j, m, bounderiesSet);
             }
         }
 
-        return idxs;
+        Index[] hole = holeArrayList.toArray(new Index[holeArrayList.size()]);
+        Index[] boundaries = bounderiesSet.toArray(new Index[bounderiesSet.size()]);
+
+        return new Hole(hole, boundaries);
     }
 
-    public Mat getDefaultWeights(Index pixelIdx, Index[] boundaries) {
+    public static void checkBounderyPixel(int i, int j, Mat m, HashSet<Index> bounderies) {
+        double HOLE_VALUE = -1.0;
+
+        int jPrev = (j > 0) ? j - 1 : j;
+        int iPrev = (i > 0) ? i - 1 : i;
+
+        if (m.get(i, jPrev)[0] != HOLE_VALUE && m.get(i, j)[0] == HOLE_VALUE) {
+            bounderies.add(new Index(i, jPrev));
+        } else if (m.get(i, jPrev)[0] == HOLE_VALUE && m.get(i, j)[0] != HOLE_VALUE) {
+            bounderies.add(new Index(i, j));
+        }
+        if (m.get(iPrev, j)[0] != HOLE_VALUE && m.get(i, j)[0] == HOLE_VALUE) {
+            bounderies.add(new Index(iPrev, j));
+        } else if (m.get(iPrev, j)[0] == HOLE_VALUE && m.get(i, j)[0] != HOLE_VALUE) {
+            bounderies.add(new Index(i, j));
+        }
+    }
+
+    public static void checkMissingPixel(int i, int j, Mat m, ArrayList<Index> hole) {
+        double HOLE_VALUE = -1.0;
+        if (m.get(i, j)[0] == HOLE_VALUE) {
+            hole.add(new Index(i, j));
+        }
+    }
+
+    public static Mat getDefaultWeights(Index pixelIdx, Index[] boundaries) {
         double EPSILON = 1e-8;
         MatOfDouble w = new MatOfDouble(boundaries.length, 1, CV_64FC1);
+        System.out.println(w.dump());
         for (int i = 0; i < boundaries.length; i++){
             double d = HoleFiller.dist(pixelIdx, boundaries[i]);
             d = Math.pow(d, 2) + EPSILON;
             w.put(i, 0, 1.0 / d);
         }
+        System.out.println(w.dump());
         return w;
     }
 
-    public double getPixelFilling(Index pixelIdx, Index[] boundaries, Mat weights) {
+    public static double getPixelFilling(Mat m, Index pixelIdx, Index[] boundaries, Mat weights) {
         MatOfDouble boundariesPixels = new MatOfDouble(boundaries.length, 1, CV_64FC1);
         for (int i = 0; i < boundaries.length; i++) {
-            boundariesPixels.put(i, 0, scaledMat.get(boundaries[i].row, boundaries[i].col));
+            boundariesPixels.put(i, 0, m.get(boundaries[i].row, boundaries[i].col));
         }
         double res = boundariesPixels.dot(weights);
         return res / Core.sumElems(boundariesPixels).val[0];
+    }
+
+    public static void fillHole(Mat m, Hole hole) {
+        for (Index idx : hole.missimgPixels) {
+            Mat w = getDefaultWeights(idx, hole.boundaries);
+            System.out.println(w.dump());
+            m.put(idx.row, idx.col, getPixelFilling(m, idx, hole.boundaries, w));
+        }
     }
 
     public static double dist(Index idx1, Index idx2) {

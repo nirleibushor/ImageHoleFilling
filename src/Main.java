@@ -55,6 +55,7 @@ public class Main {
 //        System.out.println(bounderies.dump());
 
 
+        /// create matrix with with hole ///
         hf.scaledMat = new MatOfDouble();
         Mat.ones(3,3, CV_64FC1).convertTo(hf.scaledMat, CV_64FC1);
         System.out.println(hf.scaledMat.dump());
@@ -63,11 +64,11 @@ public class Main {
 
         hf.scaledMat.put(holeIdx.row, holeIdx.col, -1.0);
         System.out.println(hf.scaledMat.dump());
-        HashSet<Index> s = HoleFiller.getHoleBounderies(hf.scaledMat);
-        Index[] boundaries = s.toArray(new Index[s.size()]);
-        Mat w = hf.get_default_weights(holeIdx, boundaries);
 
-        System.out.println(w.dump());
+        /// fill hole ///
+        hf.hole = HoleFiller.getHoleBounderies(hf.scaledMat);
+        HoleFiller.fillHole(hf.scaledMat, hf.hole);
+        System.out.println(hf.scaledMat.dump());
 
         System.out.println("done");
 
