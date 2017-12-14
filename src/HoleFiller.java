@@ -16,7 +16,7 @@ public class HoleFiller {
     public MatOfDouble scaledMat;
 
     public HoleFiller(String imgPath) {
-        this.loadGrayScaleImg(imgPath);
+//        this.loadGrayScaleImg(imgPath);
     }
 
     public void loadGrayScaleImg(String path){
@@ -96,6 +96,34 @@ public class HoleFiller {
         }
 
         return idxs;
+    }
+
+    public Mat getDefaultWeights(Index pixelIdx, Index[] boundaries) {
+        double EPSILON = 1e-8;
+        MatOfDouble w = new MatOfDouble(boundaries.length, 1, CV_64FC1);
+        for (int i = 0; i < boundaries.length; i++){
+            double d = HoleFiller.dist(pixelIdx, boundaries[i]);
+            d = Math.pow(d, 2) + EPSILON;
+            w.put(i, 0, 1.0 / d);
+        }
+        return w;
+    }
+
+    public double getPixelFilling(Index pixelIdx, Index[] boundaries, Mat weights) {
+        MatOfDouble boundariesPixels = new MatOfDouble(boundaries.length, 1, CV_64FC1);
+        for (int i = 0; i < boundaries.length; i++) {
+            boundariesPixels.put(i, 0, scaledMat.get(boundaries[i].row, boundaries[i].col));
+        }
+        double res = boundariesPixels.dot(weights);
+        return res / Core.sumElems(boundariesPixels).val[0];
+    }
+
+    public static double dist(Index idx1, Index idx2) {
+        int y1 = idx1.row;
+        int x1 = idx1.col;
+        int y2 = idx2.row;
+        int x2 = idx2.col;
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
 }
