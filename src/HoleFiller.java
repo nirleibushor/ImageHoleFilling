@@ -117,32 +117,34 @@ public class HoleFiller {
         }
     }
 
-    public static Mat getDefaultWeights(Index pixelIdx, Index[] boundaries) {
+    public static MatOfDouble getDefaultWeights(Index pixelIdx, Index[] boundaries) {
         double EPSILON = 1e-8;
-        MatOfDouble w = new MatOfDouble(boundaries.length, 1, CV_64FC1);
-        System.out.println(w.dump());
+        MatOfDouble w = new MatOfDouble(new Mat(boundaries.length, 1, CV_64FC1));
+//        System.out.println(w.dump());
         for (int i = 0; i < boundaries.length; i++){
             double d = HoleFiller.dist(pixelIdx, boundaries[i]);
             d = Math.pow(d, 2) + EPSILON;
             w.put(i, 0, 1.0 / d);
         }
-        System.out.println(w.dump());
+//        System.out.println(w.dump());
         return w;
     }
 
-    public static double getPixelFilling(Mat m, Index pixelIdx, Index[] boundaries, Mat weights) {
-        MatOfDouble boundariesPixels = new MatOfDouble(boundaries.length, 1, CV_64FC1);
+    public static double getPixelFilling(MatOfDouble m, Index pixelIdx, Index[] boundaries, MatOfDouble weights) {
+        MatOfDouble boundariesPixels = new MatOfDouble(new Mat(boundaries.length, 1, CV_64FC1));
+//        System.out.println(m.dump());
+//        System.out.println(boundariesPixels.dump());
         for (int i = 0; i < boundaries.length; i++) {
             boundariesPixels.put(i, 0, m.get(boundaries[i].row, boundaries[i].col));
         }
+//        System.out.println(boundariesPixels.dump());
         double res = boundariesPixels.dot(weights);
         return res / Core.sumElems(boundariesPixels).val[0];
     }
 
-    public static void fillHole(Mat m, Hole hole) {
+    public static void fillHole(MatOfDouble m, Hole hole) {
         for (Index idx : hole.missimgPixels) {
-            Mat w = getDefaultWeights(idx, hole.boundaries);
-            System.out.println(w.dump());
+            MatOfDouble w = getDefaultWeights(idx, hole.boundaries);
             m.put(idx.row, idx.col, getPixelFilling(m, idx, hole.boundaries, w));
         }
     }

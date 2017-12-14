@@ -58,12 +58,12 @@ public class Main {
         /// create matrix with with hole ///
         hf.scaledMat = new MatOfDouble();
         Mat.ones(3,3, CV_64FC1).convertTo(hf.scaledMat, CV_64FC1);
-        System.out.println(hf.scaledMat.dump());
+//        System.out.println(hf.scaledMat.dump());
 
         Index holeIdx = new Index(2,2);
 
         hf.scaledMat.put(holeIdx.row, holeIdx.col, -1.0);
-        System.out.println(hf.scaledMat.dump());
+//        System.out.println(hf.scaledMat.dump());
 
         /// fill hole ///
         hf.hole = HoleFiller.getHoleBounderies(hf.scaledMat);
