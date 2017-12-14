@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
+import java.util.HashSet;
 
 import static org.opencv.core.CvType.CV_64FC1;
 
@@ -70,6 +71,31 @@ public class HoleFiller {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public static HashSet<Index> getHoleBounderies(MatOfDouble m) {
+        HashSet<Index> idxs = new HashSet<>();
+        double HOLE_VALUE = -1.0;
+
+        for (int i = 0; i < m.rows(); i++) {
+            for (int j = 0; j < m.cols(); j++) {
+                int jPrev = (j > 0) ? j - 1 : j;
+                int iPrev = (i > 0) ? i - 1 : i;
+
+                if (m.get(i, jPrev)[0] != HOLE_VALUE && m.get(i, j)[0] == HOLE_VALUE) {
+                    idxs.add(new Index(i, jPrev));
+                } else if (m.get(i, jPrev)[0] == HOLE_VALUE && m.get(i, j)[0] != HOLE_VALUE) {
+                    idxs.add(new Index(i, j));
+                }
+                if (m.get(iPrev, j)[0] != HOLE_VALUE && m.get(i, j)[0] == HOLE_VALUE) {
+                    idxs.add(new Index(iPrev, j));
+                } else if (m.get(iPrev, j)[0] == HOLE_VALUE && m.get(i, j)[0] != HOLE_VALUE) {
+                    idxs.add(new Index(i, j));
+                }
+            }
+        }
+
+        return idxs;
     }
 
 }
