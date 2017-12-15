@@ -1,9 +1,9 @@
 public class Hole {
-    public Index[] missimgPixels;
+    public Index[] missingPixels;
     public Index[] boundaries;
 
     public Hole(Index[] m, Index[] b) {
-        missimgPixels = m;
+        missingPixels = m;
         boundaries = b;
     }
 }

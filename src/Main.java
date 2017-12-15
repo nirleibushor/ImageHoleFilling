@@ -13,64 +13,79 @@ public class Main {
     public static void main( String[] args ) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-
-        HoleFiller hf = new HoleFiller("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img.jpg");
-
-//        hf.setMockSquareHole();
-//        hf.updateImg();
-//        hf.writeImg("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img_gray.jpg");
-
-//        Core.MinMaxLocResult mat = Core.minMaxLoc(hf.mat);
-//        Core.MinMaxLocResult scaledMat = Core.minMaxLoc(hf.scaledMat);
-
-//        double m = hf.mat.get(0,0)[0];
-//        double scaledM = hf.scaledMat.get(0, 0)[0];
-//        System.out.println("m=");
-//        System.out.println(m);
-//        System.out.println("scaled m=");
-//        System.out.println(scaledM);
-
-//        Mat m = Mat.zeros(7, 7,CV_64FC1);
-//        MatOfDouble m2 = new MatOfDouble();
-//        m.convertTo(m2, CV_64FC1);
-//
-//        m2.put(2,2,-1.0);
-//        m2.put(2,3,-1.0);
-//        m2.put(2,4,-1.0);
-//        m2.put(3,3,-1.0);
-//        m2.put(3,4,-1.0);
-//        m2.put(4,4,-1.0);
-//
-//        System.out.println(m2.dump());
-//
-//        Mat bounderies = Mat.zeros(7,7,CV_64FC1);
-//        HashSet<Index> idxs = HoleFiller.getHoleBounderies(m2);
-//
-//        for (Index i : idxs) {
-//            int r = i.row;
-//            int c = i.col;
-//            bounderies.put(r, c, 1);
-//            System.out.format("(%d, %d)%n", r, c);
-//        }
-//        System.out.println(bounderies.dump());
-
-
-        /// create matrix with with hole ///
-        hf.scaledMat = new MatOfDouble();
-        Mat.ones(3,3, CV_64FC1).convertTo(hf.scaledMat, CV_64FC1);
-//        System.out.println(hf.scaledMat.dump());
-
-        Index holeIdx = new Index(2,2);
-
-        hf.scaledMat.put(holeIdx.row, holeIdx.col, -1.0);
-//        System.out.println(hf.scaledMat.dump());
-
-        /// fill hole ///
-        hf.hole = HoleFiller.getHoleBounderies(hf.scaledMat);
-        HoleFiller.fillHole(hf.scaledMat, hf.hole);
-        System.out.println(hf.scaledMat.dump());
+        runHoleFilling();
 
         System.out.println("done");
+    }
 
+    private static void runHoleFilling() {
+        HoleFiller hf = new HoleFiller("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img.jpg");
+        hf.scaledMat.convertTo(hf.mat, CvType.CV_8UC1);
+        hf.img = hf.matToImg();
+        hf.writeImg("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img_input.jpg");
+
+        double sum = 0.0;
+        int n = 0;
+
+        int startRow = 100;
+        int height = 50;
+        int startCol = 50;
+        int width = 100;
+
+        for (int i = startRow; i < startRow + height; i++) {
+            for (int j = startCol; j < startCol + width; j++) {
+                sum += hf.scaledMat.get(i,j)[0];
+                n++;
+            }
+        }
+
+        double avr = sum / n;
+        System.out.format("before setting mock hole, average of missing pixels = %f%n", avr);
+
+        Index[] missingPixels = HoleFiller.getMockSquareHole(new Index(startRow, startCol), height, width);
+        HoleFiller.setMockHole(hf.scaledMat, missingPixels);
+        hf.hole = HoleFiller.getHoleBounderies(hf.scaledMat);
+
+        sum = 0.0;
+        for (Index idx: hf.hole.missingPixels) {
+            sum += hf.scaledMat.get(idx.row, idx.col)[0];
+        }
+        n = hf.hole.missingPixels.length;
+        avr = sum / n;
+        System.out.format("after setting mock hole, average of missing pixels = %f%n", avr);
+
+        HoleFiller hf2 = new HoleFiller("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img.jpg");
+        HoleFiller.setVisualBounderies(hf2.scaledMat, hf.hole.boundaries, 0.0);
+
+        hf2.scaledMat.convertTo(hf2.mat, CvType.CV_8UC1);
+        hf2.img = hf2.matToImg();
+        hf2.writeImg("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img_with_boundaries.jpg");
+
+        HoleFiller hf3 = new HoleFiller("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\img.jpg");
+        HoleFiller.setMockHole(hf3.scaledMat, missingPixels);
+        hf3.hole = HoleFiller.getHoleBounderies(hf3.scaledMat);
+
+        double eps = 1e-8;
+        int z = 2;
+        HoleFiller.fillHole(hf3.scaledMat, hf3.hole, z, eps);
+
+        sum = 0.0;
+        for (Index idx: hf3.hole.missingPixels) {
+            sum += hf3.scaledMat.get(idx.row, idx.col)[0];
+        }
+        avr = sum / (double) n;
+        System.out.format("after filling hole, average of missing pixels = %f%n", avr);
+
+        sum = 0.0;
+        n = hf3.hole.boundaries.length;
+        for (Index idx: hf3.hole.boundaries) {
+            sum += hf3.scaledMat.get(idx.row, idx.col)[0];
+        }
+        avr = sum / (double) n;
+        System.out.format("average of bounderies pixels = %f%n", avr);
+
+        hf3.scaledMat.convertTo(hf3.mat, CvType.CV_8UC1);
+        hf3.img = hf3.matToImg();
+        hf3.writeImg("C:\\Users\\nirle\\IdeaProjects\\LightricksTask\\src\\imgs\\filled_img.jpg");
     }
 }
