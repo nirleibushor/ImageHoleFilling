@@ -1,13 +1,5 @@
 import org.opencv.core.*;
 
-import javax.annotation.processing.SupportedSourceVersion;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.awt.Point;
-
-
-import static org.opencv.core.CvType.CV_64FC1;
-
 public class Main {
 
     public static void main( String[] args ) {
@@ -65,9 +57,13 @@ public class Main {
         HoleFiller.setMockHole(hf3.scaledMat, missingPixels);
         hf3.hole = HoleFiller.getHoleBounderies(hf3.scaledMat);
 
-        double eps = 1e-8;
-        int z = 2;
-        HoleFiller.fillHole(hf3.scaledMat, hf3.hole, z, eps);
+//        // un-efficient //
+//        double eps = 1e-8;
+//        int z = 2;
+//        HoleFiller.fillHole(hf3.scaledMat, hf3.hole, z, eps);
+
+        // efficient //
+        HoleFiller.fillHoleCircular(hf3.scaledMat, hf3.hole);
 
         sum = 0.0;
         for (Index idx: hf3.hole.missingPixels) {

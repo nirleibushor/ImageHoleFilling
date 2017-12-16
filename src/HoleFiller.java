@@ -58,7 +58,6 @@ public class HoleFiller {
         }
     }
 
-    // todo - add idx out of bounce checks
     public static Index[] getMockSquareHole(Index topLeft, int height, int width) {
         int startRow = topLeft.row;
         int startCol = topLeft.col;
@@ -154,6 +153,59 @@ public class HoleFiller {
         for (Index idx : hole.missingPixels) {
             MatOfDouble w = getDefaultWeights(idx, hole.boundaries, z, eps);
             fillMissingPixel(m, hole, idx, w);
+        }
+    }
+
+    private static Neighborhood checkNeighborhood(MatOfDouble m, Index idx) {
+        double HOLE_VALUE = -1.0;
+
+        int r = idx.row;
+        int c = idx.col;
+
+        ArrayList<Index> nMissing = new ArrayList<>();
+        ArrayList<Index> nImg = new ArrayList<>();
+        for (int[] neighbor: Defs.clockWise) {
+            int rowDir = neighbor[0];
+            int colDir = neighbor[1];
+
+            int nRow = r + rowDir;
+            int nCol = c + colDir;
+            if (nRow > 0 && nRow < m.rows() && nCol > 0 && nCol < m.cols()) {
+                Index nIdx = new Index(nRow, nCol);
+                double p = m.get(nRow, nCol)[0];
+                if (p == HOLE_VALUE) {
+                    nMissing.add(nIdx);
+                } else {
+                    nImg.add(nIdx);
+                }
+            }
+        }
+
+        Index[] nMissingArray = nMissing.toArray(new Index[nMissing.size()]);
+        Index[] nImgArray = nImg.toArray(new Index[nImg.size()]);
+
+        return new Neighborhood(nMissingArray, nImgArray);
+    }
+
+    private static double matAverage(MatOfDouble m, Index[] idxs) {
+        double sum = 0.0;
+        for (Index idx: idxs) {
+            sum += m.get(idx.row, idx.col)[0];
+        }
+        return sum / idxs.length;
+    }
+
+    public static void fillHoleCircular(MatOfDouble m, Hole hole) {
+        // find a pixel in the out most "circle" of the hole
+        Neighborhood neighborhood = checkNeighborhood(m, hole.boundaries[0]);
+        Index p = neighborhood.missingPixels.length > 0 ? neighborhood.missingPixels[0] : null;
+
+        // circle around hole and fill
+        while (p != null) {
+            double fillVal = HoleFiller.matAverage(m, neighborhood.imgPixels); // todo try to replace with weights
+            m.put(p.row, p.col, fillVal);
+            neighborhood = checkNeighborhood(m, p);
+            p = neighborhood.missingPixels.length > 0 ? neighborhood.missingPixels[0] : null;
         }
     }
 
