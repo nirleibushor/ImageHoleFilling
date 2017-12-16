@@ -201,9 +201,11 @@ public class HoleFiller {
         Index p = neighborhood.missingPixels.length > 0 ? neighborhood.missingPixels[0] : null;
 
         // circle around hole and fill
+        double eps = 1e-8;
+        int z = 2;
         while (p != null) {
-            double fillVal = HoleFiller.matAverage(m, neighborhood.imgPixels); // todo try to replace with weights
-            m.put(p.row, p.col, fillVal);
+            MatOfDouble w = getDefaultWeights(p, hole.boundaries, z, eps);
+            fillMissingPixel(m, hole, p, w);
             neighborhood = checkNeighborhood(m, p);
             p = neighborhood.missingPixels.length > 0 ? neighborhood.missingPixels[0] : null;
         }

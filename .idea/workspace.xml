@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b72963-9d26-49a3-934a-5e5bc8b0d89b" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Defs.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Neighborhood.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/HoleFiller.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/HoleFiller.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/Main.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/Main.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/imgs/toSave/img_with_boundaries.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Hole.java" afterPath="$PROJECT_DIR$/src/Hole.java" />
       <change beforePath="$PROJECT_DIR$/src/HoleFiller.java" afterPath="$PROJECT_DIR$/src/HoleFiller.java" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/imgs/toSave/filled_img.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/imgs/toSave/img_input.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/imgs/toSave/img_with_boundaries.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/imgs/filled_img.jpg" afterPath="$PROJECT_DIR$/src/imgs/filled_img.jpg" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,21 +20,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-908">
-              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="300">
+              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HoleFiller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HoleFiller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/HoleFiller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="110" column="9" lean-forward="true" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+            <state relative-caret-position="619">
+              <caret line="207" column="44" lean-forward="false" selection-start-line="207" selection-start-column="44" selection-end-line="207" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#501#502#0" expanded="true" />
@@ -125,11 +117,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>checkMissingPixel</find>
-      <find>checkBounderyPixel</find>
-      <find>getPixelFilling</find>
-      <find>getDefaultWeights</find>
-      <find>consu</find>
       <find>EPSI</find>
       <find>bounderiesSet</find>
       <find>fillhole</find>
@@ -155,6 +142,11 @@
       <find>circu</find>
       <find>v2</find>
       <find>checkNeighborhood</find>
+      <find>cirv</find>
+      <find>eps</find>
+      <find>getDefaultWeights</find>
+      <find>getPixelFilling</find>
+      <find>fillMissingPixel</find>
     </findStrings>
     <replaceStrings>
       <replace>srcImg</replace>
@@ -184,8 +176,8 @@
         <option value="$PROJECT_DIR$/src/Defs.java" />
         <option value="$PROJECT_DIR$/src/Hole.java" />
         <option value="$PROJECT_DIR$/src/Neighborhood.java" />
-        <option value="$PROJECT_DIR$/src/HoleFiller.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/HoleFiller.java" />
       </list>
     </option>
   </component>
@@ -395,12 +387,12 @@
       <workItem from="1513091685289" duration="18222000" />
       <workItem from="1513188571444" duration="759000" />
       <workItem from="1513239349824" duration="9160000" />
-      <workItem from="1513261477635" duration="39748000" />
+      <workItem from="1513261477635" duration="40190000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67889000" />
+    <option name="totallyTimeSpent" value="68331000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -656,10 +648,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/HoleFiller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="110" column="9" lean-forward="true" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+        <state relative-caret-position="619">
+          <caret line="207" column="44" lean-forward="false" selection-start-line="207" selection-start-column="44" selection-end-line="207" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#501#502#0" expanded="true" />
@@ -667,14 +667,6 @@
             <element signature="e#2731#2732#0" expanded="true" />
             <element signature="e#2777#2778#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-908">
-          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
