@@ -1,3 +1,6 @@
+/**
+ * an object which represents a hole in an image
+ */
 public class Hole {
     private Index[] missingPixels;
     private Index[] boundariesPixels;

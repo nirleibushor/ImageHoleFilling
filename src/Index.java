@@ -1,6 +1,9 @@
+/**
+ * an object which represents a hole in a pixel's index in an image
+ */
 public class Index {
-    private int row = -1;
-    private int col = -1;
+    private int row;
+    private int col;
 
     public Index(int r, int c) {
         row = r;

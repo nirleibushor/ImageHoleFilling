@@ -1,6 +1,9 @@
+/**
+ * an object which represents the neighboring pixels of image's pixel
+ */
 public class Neighborhood {
     private Index[] missingPixels;
-    private Index[]imgPixels;
+    private Index[] imgPixels;
 
     public Neighborhood(Index[] m, Index[] ip) {
         missingPixels = m;

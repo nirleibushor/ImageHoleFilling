@@ -20,9 +20,9 @@
         </not>
     </condition>
 
-    <condition property="test" value="[default]">
+    <condition property="z" value="[default]">
         <not>
-            <isset property="test"/>
+            <isset property="z"/>
         </not>
     </condition>
 
@@ -32,21 +32,27 @@
         </not>
     </condition>
 
-    <condition property="z" value="[default]">
-        <not>
-            <isset property="z"/>
-        </not>
-    </condition>
-
     <condition property="scale" value="[default]">
         <not>
             <isset property="scale"/>
         </not>
     </condition>
 
+    <condition property="test" value="[default]">
+        <not>
+            <isset property="test"/>
+        </not>
+    </condition>
+
     <condition property="alg" value="[default]">
         <not>
             <isset property="alg"/>
+        </not>
+    </condition>
+
+    <condition property="mock" value="[default]">
+        <not>
+            <isset property="mock"/>
         </not>
     </condition>
 
@@ -82,6 +88,7 @@
         <arg value="${scale}"/>
         <arg value="${test}"/>
         <arg value="${alg}"/>
+        <arg value="${mock}"/>
         </java>
     </target>
 

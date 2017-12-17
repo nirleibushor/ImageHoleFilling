@@ -7,19 +7,34 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 
+/**
+ * a class which uses to load an image, manipulate it, and output the manipulated image
+ */
 public class HoleFiller {
 
     private String inputImgPath;
     private BufferedImage img;
+
+    // holds the images original pixel values, or those which will be converted to BufferedImage in order to output
+    // the image after it was manipulated
     private Mat mat;
+
+    // holds pixel values in double type, in order to run our algorithm's mathematical operations conveniently
     private MatOfDouble scaledMat;
+
+    // holds information of the hole in the image
     private Hole hole;
 
-    public HoleFiller(String imgPath) { // todo - add boolean scaling arg
+    public HoleFiller(String imgPath) {
         inputImgPath = imgPath;
         this.loadGrayScaleImg(imgPath);
     }
 
+    /**
+     * loads rgb image from the specified path, coverts it to grayscale and sets the following members:
+     * inputImgPath, img, mat, scaledMat
+     * @param path path to the input image
+     */
     private void loadGrayScaleImg(String path){
         try {
             File input = new File(path);
@@ -40,7 +55,7 @@ public class HoleFiller {
             mat = dstMat;
 
             scaledMat = new MatOfDouble();
-//            mat.convertTo(scaledMat, CV_64FC1, 1.0 / 255.0);
+//            mat.convertTo(scaledMat, CV_64FC1, 1.0 / 255.0); // todo check if it works with scale = false
             mat.convertTo(scaledMat, CV_64FC1);
 
             img = dstImg;
@@ -49,6 +64,10 @@ public class HoleFiller {
         }
     }
 
+    /**
+     * output an image to the specified path, according to the values in *** this.mat ***
+     * @param outputPath absolute path to output the image
+     */
     public void writeImg(String outputPath) {
         try {
             String[] inputPathSplit = inputImgPath.split("\\.");

@@ -149,8 +149,8 @@ public class Utils {
         return sum / idxs.length;
     }
 
-    public static void setVisualBoundaries(Mat m, Index[] missingPixels, double color) {
-        for (Index idx: missingPixels) {
+    public static void setVisualBoundaries(Mat m, Index[] boundariesPixels, double color) {
+        for (Index idx: boundariesPixels) {
             colorPixel(m, idx, color);
         }
     }
