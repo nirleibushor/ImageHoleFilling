@@ -1,19 +1,25 @@
-import java.util.HashSet;
-
 public class Hole {
-    public Index[] missingPixels;
-    public Index[] boundaries;
+    private Index[] missingPixels;
+    private Index[] boundariesPixels;
 
     public Hole(Index[] m, Index[] b) {
         missingPixels = m;
-        boundaries = b;
+        boundariesPixels = b;
     }
 
-    public void seMissingPixels(Index[] m) {
+    public Index[] getBoundariesPixels() {
+        return boundariesPixels;
+    }
+
+    public Index[] getMissingPixels() {
+        return missingPixels;
+    }
+
+    public void setMissingPixels(Index[] m) {
         missingPixels = m;
     }
 
-    public void setBoundaries(Index[] b) {
-        boundaries = b;
+    public void setBoundariesPixels(Index[] b) {
+        boundariesPixels = b;
     }
 }

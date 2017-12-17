@@ -1,7 +1,6 @@
 public class Index {
-
-    public int row = -1;
-    public int col = -1;
+    private int row = -1;
+    private int col = -1;
 
     public Index(int r, int c) {
         row = r;
@@ -20,5 +19,21 @@ public class Index {
     @Override
     public int hashCode() {
         return row - col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setRow(int r) {
+        row = r;
+    }
+
+    public void setCol(int c) {
+        col = c;
     }
 }
