@@ -56,7 +56,7 @@ public class Utils {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-    public static Hole getHoleBounderies(Mat m) {
+    public static Hole getHoleBoundaries(Mat m) {
         ArrayList<Index> holeArrayList = new ArrayList<>();
         HashSet<Index> boundariesSet = new HashSet<>();
 
@@ -149,7 +149,7 @@ public class Utils {
         return sum / idxs.length;
     }
 
-    public static void setVisualBounderies(Mat m, Index[] missingPixels, double color) {
+    public static void setVisualBoundaries(Mat m, Index[] missingPixels, double color) {
         for (Index idx: missingPixels) {
             colorPixel(m, idx, color);
         }
