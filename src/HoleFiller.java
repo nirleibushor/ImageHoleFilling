@@ -9,12 +9,14 @@ import java.io.File;
 
 public class HoleFiller {
 
+    private String inputImgPath;
     private BufferedImage img;
     private Mat mat;
     private MatOfDouble scaledMat;
     private Hole hole;
 
     public HoleFiller(String imgPath) { // todo - add boolean scaling arg
+        inputImgPath = imgPath;
         this.loadGrayScaleImg(imgPath);
     }
 
@@ -47,10 +49,12 @@ public class HoleFiller {
         }
     }
 
-    public void writeImg(String path) {
+    public void writeImg(String outputPath) {
         try {
-            File ouptut = new File(path);
-            ImageIO.write(img, "jpg", ouptut);
+            String[] inputPathSplit = inputImgPath.split("\\.");
+            String inputType = inputPathSplit[inputPathSplit.length-1];
+            File ouptut = new File(outputPath + "." + inputType);
+            ImageIO.write(img, inputType, ouptut);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

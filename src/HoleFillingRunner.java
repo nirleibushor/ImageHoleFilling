@@ -2,12 +2,13 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 public class HoleFillingRunner {
 
     private static void parseAgrs(String[] args) throws Exception {
-        Defs.IMG_PATH = args[0].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.IMG_PATH : args[0];
-        if (Defs.IMG_PATH == null) {
+        Defs.INPUT_IMG_PATH = args[0].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.INPUT_IMG_PATH : args[0];
+        if (Defs.INPUT_IMG_PATH == null) {
             throw new ImagePathException("You must specify image path, e.g: -Dimg=imgs\\img1 (absolute path " +
                     "also permitted), aborting ...");
         }
@@ -33,21 +34,21 @@ public class HoleFillingRunner {
         System.out.println("Done ...");
     }
 
-    private static void createImgsDir() {
-        File dir = new File(Defs.PROJECT_PATH + "\\" + Defs.OUTPUT_IMGS_DIR);
+    private static void createOutputImgsDir() {
+        File dir = new File(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR).toString());
         if (!dir.exists()) {
             dir.mkdir();
         }
     }
 
     private static void runHoleFilling() {
-        HoleFiller hf = new HoleFiller(Defs.IMG_PATH);
+        HoleFiller hf = new HoleFiller(Defs.INPUT_IMG_PATH);
         hf.getScaledMat().convertTo(hf.getMat(), CvType.CV_8UC1);
         hf.setImg(Utils.matToImg(hf.getMat()));
 
-        createImgsDir();
+        createOutputImgsDir();
 
-        hf.writeImg(Defs.PROJECT_PATH + "\\" + Defs.OUTPUT_IMGS_DIR + "\\img_input.jpg");
+        hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.INPUT_GRAYSCALE_IMG_NAME).toString());
 
         int startRow = 100;
         int height = 50;
@@ -81,14 +82,14 @@ public class HoleFillingRunner {
             System.out.format("after setting mock hole, average of missing pixels = %f%n", avr);
         }
 
-        HoleFiller hf2 = new HoleFiller(Defs.IMG_PATH);
+        HoleFiller hf2 = new HoleFiller(Defs.INPUT_IMG_PATH);
         Utils.setVisualBoundaries(hf2.getScaledMat(), hf.getHole().getBoundariesPixels(), 0.0);
 
         hf2.getScaledMat().convertTo(hf2.getMat(), CvType.CV_8UC1);
         hf2.setImg(Utils.matToImg(hf2.getMat()));
-        hf2.writeImg(Defs.PROJECT_PATH + "\\" + Defs.OUTPUT_IMGS_DIR + "\\img_with_boundaries.jpg");
+        hf2.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.BOUNDARY_VIS_IMG_NAME).toString());
 
-        HoleFiller hf3 = new HoleFiller(Defs.IMG_PATH);
+        HoleFiller hf3 = new HoleFiller(Defs.INPUT_IMG_PATH);
         MockUtils.setMockHole(hf3.getScaledMat(), missingPixels);
         hf3.setHole(Utils.getHoleBoundaries(hf3.getScaledMat()));
 
@@ -118,6 +119,6 @@ public class HoleFillingRunner {
 
         hf3.getScaledMat().convertTo(hf3.getMat(), CvType.CV_8UC1);
         hf3.setImg(Utils.matToImg(hf3.getMat()));
-        hf3.writeImg(Defs.PROJECT_PATH + "\\" + Defs.OUTPUT_IMGS_DIR + "\\filled_img.jpg");
+        hf3.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.FINAL_FILLED_IMG_NAME).toString());
     }
 }
