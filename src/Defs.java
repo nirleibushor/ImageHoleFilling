@@ -4,7 +4,7 @@
  * command line - please see README and HoleFillingRunner.parseAgrs() for more info
  */
 public class Defs {
-    public static double EPSILON = 1e-8;
+    public static double EPSILON = 1e-10;
 
     public static final int Z_DEF = 4;
     public static final int Z_CIRC_DEF = 1;
@@ -23,15 +23,11 @@ public class Defs {
     // which is later filled.
     // if false, an image which possibly contains a hole is loaded, and filled by the same algorithm
     public static boolean MOCK_MODE = true;
-
-    public static int MOCK_HOLE_START_ROW_DEF = 100;
-    public static int MOCK_HOLE_START_COL_DEF = 50;
-    public static int MOCK_HOLE_HEIGHT_DEF = 50;
-    public static int MOCK_HOLE_WIDTH_ROW_DEF = 100;
-    public static int MOCK_HOLE_START_ROW;
-    public static int MOCK_HOLE_START_COL;
-    public static int MOCK_HOLE_HEIGHT;
-    public static int MOCK_HOLE_WIDTH;
+    
+    public static int MOCK_HOLE_START_ROW = 100;
+    public static int MOCK_HOLE_START_COL = 50;
+    public static int MOCK_HOLE_HEIGHT = 50;
+    public static int MOCK_HOLE_WIDTH = 100;
 
     // file system paths, and output file names
     public static String PROJECT_PATH = System.getProperty("user.dir");

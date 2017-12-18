@@ -167,7 +167,8 @@ public class Utils {
     }
 
     /**
-     * if the matrix's pixel in the given location is a boundary pixel of a hole, adds it to the boundary pixels set
+     * if the matrix's pixel in the given location is a boundary pixel of a hole (4-connectivity based)
+     * it is added to the boundary pixels set
      * @param i row of pixel to be checked
      * @param j col of pixel to be checked
      * @param m matrix to be checked
@@ -190,7 +191,8 @@ public class Utils {
     }
 
     /**
-     * if the matrix's pixel in the given location is missing pixel of a hole, adds it to the missing pixels arrayList
+     * if the matrix's pixel in the given location is missing pixel of a hole,
+     * it is added to the missing pixels arrayList
      * @param i row of pixel to be checked
      * @param j col of pixel to be checked
      * @param m matrix to be checked

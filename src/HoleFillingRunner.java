@@ -38,11 +38,6 @@ public class HoleFillingRunner {
             Defs.MOCK_HOLE_HEIGHT = intData[1];
             Defs.MOCK_HOLE_START_COL = intData[2];
             Defs.MOCK_HOLE_WIDTH = intData[3];
-        } else {
-            Defs.MOCK_HOLE_START_ROW = Defs.MOCK_HOLE_START_ROW_DEF;
-            Defs.MOCK_HOLE_HEIGHT = Defs.MOCK_HOLE_HEIGHT_DEF;
-            Defs.MOCK_HOLE_START_COL = Defs.MOCK_HOLE_START_COL_DEF;
-            Defs.MOCK_HOLE_WIDTH = Defs.MOCK_HOLE_WIDTH_ROW_DEF;
         }
     }
 
