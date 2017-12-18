@@ -86,8 +86,9 @@ public class HoleFillingRunner {
     private static void runMockHoleFilling() {
         // load color rgb image, coverts in to grayscale, and saves it in outputImgs folder
         HoleFiller hf = new HoleFiller(Defs.INPUT_IMG_PATH);
-        hf.getScaledMat().convertTo(hf.getMat(), CvType.CV_8UC1);
-        hf.setImg(Utils.matToImg(hf.getMat()));
+        Mat outputMat = new Mat();
+        hf.getMat().convertTo(outputMat, CvType.CV_8UC1);
+        hf.setImg(Utils.matToImg(outputMat));
 
         createOutputImgsDir();
 
@@ -100,7 +101,7 @@ public class HoleFillingRunner {
             int n = 0;
             for (int i = Defs.MOCK_HOLE_START_ROW; i < Defs.MOCK_HOLE_START_ROW + Defs.MOCK_HOLE_HEIGHT; i++) {
                 for (int j = Defs.MOCK_HOLE_START_COL; j < Defs.MOCK_HOLE_START_COL + Defs.MOCK_HOLE_WIDTH; j++) {
-                    sum += hf.getScaledMat().get(i,j)[0];
+                    sum += hf.getMat().get(i,j)[0];
                     n++;
                 }
             }
@@ -111,15 +112,15 @@ public class HoleFillingRunner {
         // set the mock hole
         Index[] missingPixels = MockUtils.getMockSquareHole(new Index(Defs.MOCK_HOLE_START_ROW,
                         Defs.MOCK_HOLE_START_COL), Defs.MOCK_HOLE_HEIGHT, Defs.MOCK_HOLE_WIDTH);
-        MockUtils.setMockHole(hf.getScaledMat(), missingPixels);
-        hf.setHole(Utils.getHoleBoundaries(hf.getScaledMat()));
+        MockUtils.setMockHole(hf.getMat(), missingPixels);
+        hf.setHole(Utils.getHoleBoundaries(hf.getMat()));
 
         if (Defs.TEST_MODE) {
             // logs average of pixels in the locations which were set as the mock hole,
             // now we expect it to be -1.0
             double sum = 0.0;
             for (Index idx: hf.getHole().getMissingPixels()) {
-                sum += hf.getScaledMat().get(idx.getRow(), idx.getCol())[0];
+                sum += hf.getMat().get(idx.getRow(), idx.getCol())[0];
             }
             int n = hf.getHole().getMissingPixels().length;
             double avr = sum / n;
@@ -129,24 +130,24 @@ public class HoleFillingRunner {
         // set visualization of out mock hole's boundaries, ad a black line, and output the
         // grayscale image with this visualization
         HoleFiller hf2 = new HoleFiller(Defs.INPUT_IMG_PATH);
-        Utils.setVisualBoundaries(hf2.getScaledMat(), hf.getHole().getBoundariesPixels(), 0.0);
+        Utils.setVisualBoundaries(hf2.getMat(), hf.getHole().getBoundariesPixels(), 0.0);
 
-        hf2.getScaledMat().convertTo(hf2.getMat(), CvType.CV_8UC1);
-        hf2.setImg(Utils.matToImg(hf2.getMat()));
+        hf2.getMat().convertTo(outputMat, CvType.CV_8UC1);
+        hf2.setImg(Utils.matToImg(outputMat));
         hf2.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.BOUNDARY_VIS_IMG_NAME).toString());
 
         // load the input image again, set our mock hole, and fill it according to the chosen algorithm
         HoleFiller hf3 = new HoleFiller(Defs.INPUT_IMG_PATH);
-        MockUtils.setMockHole(hf3.getScaledMat(), missingPixels);
-        hf3.setHole(Utils.getHoleBoundaries(hf3.getScaledMat()));
+        MockUtils.setMockHole(hf3.getMat(), missingPixels);
+        hf3.setHole(Utils.getHoleBoundaries(hf3.getMat()));
 
         if (Defs.ALG == 0) {
-            Utils.fillHole(hf3.getScaledMat(), hf3.getHole(), Defs.Z, Defs.EPSILON);
+            Utils.fillHole(hf3.getMat(), hf3.getHole(), Defs.Z, Defs.EPSILON);
         } else if (Defs.ALG == 1) {
 //            HashSet<Index> boundariesSet = new HashSet<>(Arrays.asList(hf3.getHole().getBoundariesPixels()));
 //            hf3.getHole().setBoundariesSet(boundariesSet);
 //            Utils.fillHoleCircular(hf3.getScaledMat(), hf3.getHole(), 0.5);
-            Utils.fillHoleCircular(hf3.getScaledMat(), hf3.getHole());
+            Utils.fillHoleCircular(hf3.getMat(), hf3.getHole());
         }
 
         if (Defs.TEST_MODE) {
@@ -154,7 +155,7 @@ public class HoleFillingRunner {
             // boundaries - we expect them to be reasonably close
             double sum = 0.0;
             for (Index idx: hf3.getHole().getMissingPixels()) {
-                sum += hf3.getScaledMat().get(idx.getRow(), idx.getCol())[0];
+                sum += hf3.getMat().get(idx.getRow(), idx.getCol())[0];
             }
             int n = hf3.getHole().getMissingPixels().length;
             double avr = sum / n;
@@ -162,7 +163,7 @@ public class HoleFillingRunner {
 
             sum = 0.0;
             for (Index idx: hf3.getHole().getBoundariesPixels()) {
-                sum += hf3.getScaledMat().get(idx.getRow(), idx.getCol())[0];
+                sum += hf3.getMat().get(idx.getRow(), idx.getCol())[0];
             }
             n = hf3.getHole().getBoundariesPixels().length;
             avr = sum / n;
@@ -170,38 +171,39 @@ public class HoleFillingRunner {
         }
 
         // output the final image after missing pixels where filled
-        hf3.getScaledMat().convertTo(hf3.getMat(), CvType.CV_8UC1);
-        hf3.setImg(Utils.matToImg(hf3.getMat()));
+        hf3.getMat().convertTo(outputMat, CvType.CV_8UC1);
+        hf3.setImg(Utils.matToImg(outputMat));
         hf3.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.FINAL_FILLED_IMG_NAME).toString());
     }
 
     private static void runRealHoleFilling() {
         // load color rgb image, coverts in to grayscale, and saves it in outputImgs folder
         HoleFiller hf = new HoleFiller(Defs.INPUT_IMG_PATH);
-        hf.getScaledMat().convertTo(hf.getMat(), CvType.CV_8UC1);
-        hf.setImg(Utils.matToImg(hf.getMat()));
+        Mat outputMat = new Mat();
+        hf.getMat().convertTo(outputMat, CvType.CV_8UC1);
+        hf.setImg(Utils.matToImg(outputMat));
 
         createOutputImgsDir();
 
         hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.INPUT_GRAYSCALE_IMG_NAME).toString());
 
         // find missing pixels, and boundary pixels, of the hole
-        Hole hole = Utils.getHoleBoundaries(hf.getScaledMat());
+        Hole hole = Utils.getHoleBoundaries(hf.getMat());
         hf.setHole(hole);
 
         // fill the hole
         if (Defs.ALG == 0) {
-            Utils.fillHole(hf.getScaledMat(), hf.getHole(), Defs.Z, Defs.EPSILON);
+            Utils.fillHole(hf.getMat(), hf.getHole(), Defs.Z, Defs.EPSILON);
         } else if (Defs.ALG == 1) {
-            Utils.fillHoleCircular(hf.getScaledMat(), hf.getHole());
+            Utils.fillHoleCircular(hf.getMat(), hf.getHole());
         }
 
         // visualize the hole's boundaries in the final image
-        Utils.setVisualBoundaries(hf.getScaledMat(), hf.getHole().getBoundariesPixels(), 0.0);
+        Utils.setVisualBoundaries(hf.getMat(), hf.getHole().getBoundariesPixels(), 0.0);
 
         // output the final image with filling and boundaries
-        hf.getScaledMat().convertTo(hf.getMat(), CvType.CV_8UC1);
-        hf.setImg(Utils.matToImg(hf.getMat()));
+        hf.getMat().convertTo(outputMat, CvType.CV_8UC1);
+        hf.setImg(Utils.matToImg(outputMat));
         hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.FINAL_FILLED_IMG_NAME).toString());
     }
 

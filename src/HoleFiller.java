@@ -15,12 +15,8 @@ public class HoleFiller {
     private String inputImgPath;
     private BufferedImage img;
 
-    // holds the images original pixel values, or those which will be converted to BufferedImage in order to output
-    // the image after it was manipulated
-    private Mat mat;
-
     // holds pixel values in double type, in order to run our algorithm's mathematical operations conveniently
-    private MatOfDouble scaledMat;
+    private MatOfDouble mat;
 
     // holds information of the hole in the image
     private Hole hole;
@@ -52,9 +48,8 @@ public class HoleFiller {
             BufferedImage dstImg = new BufferedImage(dstMat.cols(),dstMat.rows(), BufferedImage.TYPE_BYTE_GRAY);
             dstImg.getRaster().setDataElements(0, 0, dstMat.cols(), dstMat.rows(), dstData);
 
-            mat = dstMat;
-            scaledMat = new MatOfDouble();
-            mat.convertTo(scaledMat, CV_64FC1);
+            mat = new MatOfDouble();
+            dstMat.convertTo(mat, CV_64FC1);
 
             img = dstImg;
         } catch (Exception e) {
@@ -81,12 +76,8 @@ public class HoleFiller {
         img = bi;
     }
 
-    public void setMat(Mat m) {
-        mat = m;
-    }
-
-    public void setScaledMat(MatOfDouble sm) {
-        scaledMat = sm;
+    public void setMat(MatOfDouble sm) {
+        mat = sm;
     }
 
     public void setHole(Hole h) {
@@ -98,12 +89,8 @@ public class HoleFiller {
         return img;
     }
 
-    public Mat getMat() {
+    public MatOfDouble getMat() {
         return mat;
-    }
-
-    public MatOfDouble getScaledMat() {
-        return scaledMat;
     }
 
     public Hole getHole() {
