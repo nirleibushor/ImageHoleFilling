@@ -1,5 +1,4 @@
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
+import org.opencv.core.*;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -20,12 +19,31 @@ public class HoleFillingRunner {
             throw new ImagePathException("You must specify image path, e.g: -Dimg=imgs\\img1 (absolute path " +
                     "also permitted), aborting ...");
         }
-        Defs.Z = args[1].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.Z : Integer.parseInt(args[1]);
-        Defs.EPSILON = args[2].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.EPSILON : Double.parseDouble(args[2]);
-        Defs.SCALE_MODE = args[3].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.SCALE_MODE : Boolean.parseBoolean(args[3]);
+
+        Defs.ALG = args[1].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.ALG : Integer.parseInt(args[1]);
+        Defs.Z = args[2].equals(Defs.CMD_LINE_ARG_DEF) ? (Defs.ALG == 0 ? Defs.Z_DEF : Defs.Z_CIRC_DEF)
+                : Integer.parseInt(args[2]);
+        Defs.EPSILON = args[3].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.EPSILON : Double.parseDouble(args[3]);
         Defs.TEST_MODE = args[4].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.TEST_MODE : Boolean.parseBoolean(args[4]);
-        Defs.ALG = args[5].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.ALG : Integer.parseInt(args[5]);
-        Defs.MOCK_MODE = args[6].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.MOCK_MODE : Boolean.parseBoolean(args[6]);
+        Defs.MOCK_MODE = args[5].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.MOCK_MODE : Boolean.parseBoolean(args[5]);
+
+        String s = args[6].equals(Defs.CMD_LINE_ARG_DEF) ? null : args[6];
+        if (s != null) {
+            String [] stringData = s.split(" ");
+            int[] intData = new int[stringData.length];
+            for (int i = 0; i < stringData.length; i++) {
+                intData[i] = Integer.parseInt(stringData[i]);
+            }
+            Defs.MOCK_HOLE_START_ROW = intData[0];
+            Defs.MOCK_HOLE_HEIGHT = intData[1];
+            Defs.MOCK_HOLE_START_COL = intData[2];
+            Defs.MOCK_HOLE_WIDTH = intData[3];
+        } else {
+            Defs.MOCK_HOLE_START_ROW = Defs.MOCK_HOLE_START_ROW_DEF;
+            Defs.MOCK_HOLE_HEIGHT = Defs.MOCK_HOLE_HEIGHT_DEF;
+            Defs.MOCK_HOLE_START_COL = Defs.MOCK_HOLE_START_COL_DEF;
+            Defs.MOCK_HOLE_WIDTH = Defs.MOCK_HOLE_WIDTH_ROW_DEF;
+        }
     }
 
     public static void main(String[] args) {
@@ -39,6 +57,10 @@ public class HoleFillingRunner {
         }
 
         if (Defs.MOCK_MODE) {
+            System.out.format("mock hole start row = %d%n", Defs.MOCK_HOLE_START_ROW);
+            System.out.format("mock hole height = %d%n", Defs.MOCK_HOLE_HEIGHT);
+            System.out.format("mock hole start col = %d%n", Defs.MOCK_HOLE_START_COL);
+            System.out.format("mock hole width = %d%n", Defs.MOCK_HOLE_WIDTH);
             runMockHoleFilling();
         } else {
             runRealHoleFilling();
@@ -71,18 +93,13 @@ public class HoleFillingRunner {
 
         hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.INPUT_GRAYSCALE_IMG_NAME).toString());
 
-        int startRow = 100;
-        int height = 50;
-        int startCol = 50;
-        int width = 100;
-
         if (Defs.TEST_MODE) {
             // logs average of pixels in the locations which will hold the mock hole,
             // so would be able to compare to values we get later
             double sum = 0.0;
             int n = 0;
-            for (int i = startRow; i < startRow + height; i++) {
-                for (int j = startCol; j < startCol + width; j++) {
+            for (int i = Defs.MOCK_HOLE_START_ROW; i < Defs.MOCK_HOLE_START_ROW + Defs.MOCK_HOLE_HEIGHT; i++) {
+                for (int j = Defs.MOCK_HOLE_START_COL; j < Defs.MOCK_HOLE_START_COL + Defs.MOCK_HOLE_WIDTH; j++) {
                     sum += hf.getScaledMat().get(i,j)[0];
                     n++;
                 }
@@ -92,7 +109,8 @@ public class HoleFillingRunner {
         }
 
         // set the mock hole
-        Index[] missingPixels = MockUtils.getMockSquareHole(new Index(startRow, startCol), height, width);
+        Index[] missingPixels = MockUtils.getMockSquareHole(new Index(Defs.MOCK_HOLE_START_ROW,
+                        Defs.MOCK_HOLE_START_COL), Defs.MOCK_HOLE_HEIGHT, Defs.MOCK_HOLE_WIDTH);
         MockUtils.setMockHole(hf.getScaledMat(), missingPixels);
         hf.setHole(Utils.getHoleBoundaries(hf.getScaledMat()));
 
@@ -125,6 +143,9 @@ public class HoleFillingRunner {
         if (Defs.ALG == 0) {
             Utils.fillHole(hf3.getScaledMat(), hf3.getHole(), Defs.Z, Defs.EPSILON);
         } else if (Defs.ALG == 1) {
+//            HashSet<Index> boundariesSet = new HashSet<>(Arrays.asList(hf3.getHole().getBoundariesPixels()));
+//            hf3.getHole().setBoundariesSet(boundariesSet);
+//            Utils.fillHoleCircular(hf3.getScaledMat(), hf3.getHole(), 0.5);
             Utils.fillHoleCircular(hf3.getScaledMat(), hf3.getHole());
         }
 
@@ -183,4 +204,33 @@ public class HoleFillingRunner {
         hf.setImg(Utils.matToImg(hf.getMat()));
         hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.FINAL_FILLED_IMG_NAME).toString());
     }
+
+    public static void testFillMatrix() {
+        Mat m = new Mat(4,4, CvType.CV_8UC1);
+        MatOfDouble md = new MatOfDouble();
+        m.convertTo(md, CvType.CV_64FC1);
+
+        for (int j = 0; j < md.cols(); j++) {
+            md.put(0, j, 0.9);
+            md.put(3, j, 0.1);
+        }
+        for (int i = 1; i < md.rows() - 1; i++) {
+            md.put(i, 0, 0.2);
+            md.put(i, 3, 0.2);
+        }
+        for (int i = 1; i < md.rows() - 1; i++) {
+            for (int j = 1; j < md.cols() - 1; j++) {
+                md.put(i, j, Defs.HOLE_VALUE);
+            }
+        }
+        System.out.println("Matrix with hole:");
+        System.out.println(md.dump());
+
+        Hole hole  = Utils.getHoleBoundaries(md);
+
+        Utils.fillHoleCircular(md, hole);
+        System.out.println("Matrix after filling:");
+        System.out.println(md.dump());
+    }
+
 }

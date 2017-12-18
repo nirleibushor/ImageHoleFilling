@@ -2,7 +2,6 @@
 
     <property name="src.dir"     value="src"/>
 
-    <!--<property name="lib.dir"     value="${ocvJarDir}"/>-->
     <property name="lib.dir"     value="C:\opencv\build\java"/>
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
@@ -20,6 +19,12 @@
         </not>
     </condition>
 
+    <condition property="alg" value="[default]">
+        <not>
+            <isset property="alg"/>
+        </not>
+    </condition>
+
     <condition property="z" value="[default]">
         <not>
             <isset property="z"/>
@@ -32,27 +37,21 @@
         </not>
     </condition>
 
-    <condition property="scale" value="[default]">
-        <not>
-            <isset property="scale"/>
-        </not>
-    </condition>
-
     <condition property="test" value="[default]">
         <not>
             <isset property="test"/>
         </not>
     </condition>
 
-    <condition property="alg" value="[default]">
-        <not>
-            <isset property="alg"/>
-        </not>
-    </condition>
-
     <condition property="mock" value="[default]">
         <not>
             <isset property="mock"/>
+        </not>
+    </condition>
+
+    <condition property="mockhole" value="[default]">
+        <not>
+            <isset property="mockhole"/>
         </not>
     </condition>
 
@@ -76,19 +75,18 @@
 
     <target name="run" depends="jar">
         <java fork="true" classname="${main-class}">
-            <!--<sysproperty key="java.library.path" path="${ocvLibDir}"/>-->
             <sysproperty key="java.library.path" path="C:\opencv\build\java\x64"/>
             <classpath>
                 <path refid="classpath"/>
                 <path location="${jar.dir}/${ant.project.name}.jar"/>
             </classpath>
         <arg value="${imgpath}"/>
+            <arg value="${alg}"/>
         <arg value="${z}"/>
         <arg value="${eps}"/>
-        <arg value="${scale}"/>
         <arg value="${test}"/>
-        <arg value="${alg}"/>
         <arg value="${mock}"/>
+        <arg value="${mockhole}"/>
         </java>
     </target>
 

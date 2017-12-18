@@ -53,9 +53,7 @@ public class HoleFiller {
             dstImg.getRaster().setDataElements(0, 0, dstMat.cols(), dstMat.rows(), dstData);
 
             mat = dstMat;
-
             scaledMat = new MatOfDouble();
-//            mat.convertTo(scaledMat, CV_64FC1, 1.0 / 255.0); // todo check if it works with scale = false
             mat.convertTo(scaledMat, CV_64FC1);
 
             img = dstImg;

@@ -5,12 +5,12 @@
  */
 public class Defs {
     public static double EPSILON = 1e-8;
-    public static int Z = 4;
-    public final static double HOLE_VALUE = -1.0;
 
-    // if true, before filling algorithm runs, the matrix which hold image's pixels (HoleFiller.scaledMat)
-    // will be scaled from [0, 255] to [0, 1], as described in the task description
-    public static boolean SCALE_MODE = false;
+    public static final int Z_DEF = 4;
+    public static final int Z_CIRC_DEF = 1;
+    public static int Z;
+
+    public final static double HOLE_VALUE = -1.0;
 
     // if true some logs will be printed to standard output, which will enable us to track our algorithm's performance
     public static boolean TEST_MODE = false;
@@ -23,6 +23,15 @@ public class Defs {
     // which is later filled.
     // if false, an image which possibly contains a hole is loaded, and filled by the same algorithm
     public static boolean MOCK_MODE = true;
+
+    public static int MOCK_HOLE_START_ROW_DEF = 100;
+    public static int MOCK_HOLE_START_COL_DEF = 50;
+    public static int MOCK_HOLE_HEIGHT_DEF = 50;
+    public static int MOCK_HOLE_WIDTH_ROW_DEF = 100;
+    public static int MOCK_HOLE_START_ROW;
+    public static int MOCK_HOLE_START_COL;
+    public static int MOCK_HOLE_HEIGHT;
+    public static int MOCK_HOLE_WIDTH;
 
     // file system paths, and output file names
     public static String PROJECT_PATH = System.getProperty("user.dir");
@@ -37,6 +46,7 @@ public class Defs {
     public final static String CMD_LINE_ARG_DEF = "[default]";
 
     // uses to iterate over a pixel's neighboring pixels. see usage at Utils.checkNeighborhood()
-    public final static int[][] clockWise = new int[][] {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
-            {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    public final static int[][] clockWise = new int[][] {{-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
+//    public final static int[][] clockWise = new int[][] {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
+//            {0, 1}, {1, -1}, {1, 0}, {1, 1}};
 }
