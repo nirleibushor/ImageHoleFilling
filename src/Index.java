@@ -12,16 +12,17 @@ public class Index {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Index)){
-            return false;
-        } else {
-            return ((Index) other).row == row && ((Index) other).col == col;
-        }
+        return (other instanceof Index) && ((Index) other).row == row && ((Index) other).col == col;
     }
 
     @Override
     public int hashCode() {
         return row - col;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + Integer.toString(row) + ", " + Integer.toString(col) + ")";
     }
 
     public int getRow() {

@@ -2,8 +2,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.util.function.BiFunction;
 
 import static org.opencv.core.CvType.CV_64FC1;
@@ -40,33 +39,137 @@ public class Utils {
     }
 
     /**
-     * approximately fills the hole in the given matrix, according to the requirements in section 5
-     * @param m matrix to fill
-     * @param hole object contains information about boundaries and missing pixels of the hole
+     * receives a matrix representing an image and the locations of the pixels in the outmost perimeter
+     * of the hole in the image.
+     *
+     * this is the algorithm which is required in section 5
+     * approximates the algorithm from section 2 by filling perimeter by perimeter of the hole,
+     * from the outmost and inner.
+     * @param m matrix representing an image
+     * @param boundaries locations of pixels in the outmost perimeter of the hole in the image
      */
-    public static void fillHoleCircular(MatOfDouble m, Hole hole) {
-//    public static void fillHoleCircular(MatOfDouble m, Hole hole, double factor) {
-        // find a pixel in the out most "circle" of the hole
-        Neighborhood neighborhood = checkNeighborhood(m, hole.getBoundariesPixels()[0]);
-        Index p = neighborhood.getMissingPixels().length > 0 ? neighborhood.getMissingPixels()[0] : null;
-        if (p != null) {
-            neighborhood = checkNeighborhood(m, p);
+    public static void fillHoleCircular(MatOfDouble m, Index[] boundaries) {
+        Index[] currPerimeter = boundaries;
+        HashSet<Index> nextPerimeter; // (set is needed to prevent duplicates)
+        Neighborhood n;
+
+        boolean pixelsLeft = currPerimeter.length > 0;
+
+        // while there is still an inner perimeter, keep updating it to be the next one, and fill all it's pixels
+        // according to the previous already filled ones (or the boarder pixels for the outmost perimeter)
+        while (pixelsLeft) {
+            nextPerimeter = new HashSet<>();
+            for (Index p: currPerimeter) {
+                n = checkNeighborhood(m, p);
+
+                // fill the current checked perimeter pixel
+                // average of the pixels is used for simplification, because using weights function
+                // didn't seem to make any difference make
+                m.put(p.getRow(), p.getCol(), matAvrg(m, n.getImgPixels()));
+
+                // add relevant pixels to the next inner perimeter
+                nextPerimeter.addAll(Arrays.asList(n.getMissingPixels()));
+            }
+
+            // update inner perimeter to be the current one iterated
+            currPerimeter = nextPerimeter.toArray(new Index[nextPerimeter.size()]);
+            pixelsLeft = currPerimeter.length > 0;
+        }
+    }
+
+    /**
+     * @return a map which represents directions in 4-connectivity, clockwise
+     */
+    public static Map<Integer, int[]> getDirectionsMap() {
+        Map<Integer, int[]> directions = new HashMap<>();
+        directions.put(0, new int[]{0,1});
+        directions.put(3, new int[]{1, 0});
+        directions.put(2, new int[]{0,-1});
+        directions.put(1, new int[]{-1,0});
+        return directions;
+    }
+
+    /**
+     * adds the first pixel of the hole in m to pixels ArrayList, if such hole exist
+     * @param m matrix representing an image
+     * @param pixels ArrayList to add the found pixel to
+     */
+    public static void addFirstMissingPixel(MatOfDouble m, ArrayList<Index> pixels) {
+        outer: for (int i = 0; i < m.rows(); i++) {
+            for (int j = 0; j < m.cols(); j++) {
+                if (m.get(i, j)[0] == Defs.HOLE_VALUE) {
+                    pixels.add(new Index(i, j));
+                    break outer;
+                }
+            }
+        }
+    }
+
+    /**
+     * Follows the perimeter of a hole in the matrix and returns the boarder as an array of Index objects
+     *
+     * In opposed to the method Utils.findHole(Mat m), here, the perimeter pixels will be ordered in a
+     * "topological way", one after the other.
+     *
+     * This method is used to get the hole's perimeter for Utils.fillHoleCircular()
+     * @param m matrix represents the image
+     * @return Index[]
+     */
+    public static Index[] followHolePerimeter(MatOfDouble m) {
+        // find the first pixel of the hole
+        ArrayList<Index> perimeter = new ArrayList<>();
+        addFirstMissingPixel(m, perimeter);
+        if (perimeter.size() == 0) {
+            return new Index[0];
         }
 
-        // circle around the hole and fill
-        while (p != null) {
-            // get weights based on pixels which aren't missing in the image, and are neighboring to the
-            // inspected pixel p, then fill pixel according to the same formula as in section 2
-            MatOfDouble w = getDefaultWeights(p, neighborhood.getImgPixels(), Defs.Z, Defs.EPSILON);
-//            MatOfDouble w = getCircularWeights(p, neighborhood.getImgPixels(), hole.getBoundariesSet(),
-//                    Defs.Z, Defs.EPSILON, factor);
+        // define directions, in 4-connectivity, clockwise
+        Map<Integer, int[]> directions = getDirectionsMap();
 
-            fillMissingPixel(m, neighborhood.getImgPixels(), p, w);
+        // start following the perimeter
+        int dir = 0;
+        Index first = perimeter.get(0);
+        Index curr = perimeter.get(0), next = new Index(-1, -1);
+        boolean neighborFound;
 
-            // go to next missing pixel, from p's neighboring pixels. If non left, finish
-            neighborhood = checkNeighborhood(m, p);
-            p = neighborhood.getMissingPixels().length > 0 ? neighborhood.getMissingPixels()[0] : null;
+        // loop until a full round is complete
+        while (curr.getRow() != first.getRow() || curr.getCol() != first.getCol() || perimeter.size() < 2) {
+
+            // for the current pixel, find a neighbor which is the next one on the perimeter
+            neighborFound = false;
+            while (!neighborFound) {
+                int[] currDirection = directions.get(dir);
+                next = new Index(curr.getRow() + currDirection[0], curr.getCol() + currDirection[1]);
+                if (m.get(next.getRow(), next.getCol())[0] == Defs.HOLE_VALUE) { // found
+                    perimeter.add(next);
+                    neighborFound = true;
+                } else { // not found yet, go to next direction
+                    dir = (dir + 3) % 4;
+                }
+            }
+            curr = next; // after next perimeter pixel found, make it current, and keep following
         }
+
+        // remove the last pixel, which is identical to the first, and return result
+        perimeter.remove(perimeter.get(perimeter.size() - 1));
+        return perimeter.toArray(new Index[perimeter.size()]);
+    }
+
+    /**
+     * returns the average of the pixels of m, which are specified in the locations in idxs
+     *
+     * this function is used instead of a weights function, for example in cases that we know that we are
+     * considering only pixels in the neighborhood of the pixel we want to fill
+     * @param m
+     * @param idxs
+     * @return
+     */
+    public static double matAvrg(MatOfDouble m, Index[] idxs) {
+        double sum = 0;
+        for (Index idx: idxs) {
+            sum += m.get(idx.getRow(), idx.getCol())[0];
+        }
+        return sum / idxs.length;
     }
 
     /**
@@ -130,26 +233,12 @@ public class Utils {
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
-//    private static MatOfDouble getCircularWeights(Index missingPixelIdx, Index[] imgPixels,
-//                                                  HashSet<Index> boundaries, int z, double eps, double factor) {
-//        MatOfDouble w = new MatOfDouble(new Mat(imgPixels.length, 1, CV_64FC1));
-//
-//        for (int i = 0; i < imgPixels.length; i++){
-//            double d = Utils.dist(missingPixelIdx, imgPixels[i]);
-//            d = Math.pow(d, z);
-//            d = boundaries.contains(imgPixels[i]) ? d * factor : d;
-//            d += eps;
-//            w.put(i, 0, 1.0 / d);
-//        }
-//        return w;
-//    }
-
     /**
      * returns a Hole object, based on the missing pixels in the given matrix
      * @param m matrix which is to be inspected for a hole
      * @return Hole object
      */
-    public static Hole getHoleBoundaries(Mat m) {
+    public static Hole findHole(Mat m) {
         ArrayList<Index> holeArrayList = new ArrayList<>();
         HashSet<Index> boundariesSet = new HashSet<>(); // set because it's needed to prevent duplicates
 
@@ -240,14 +329,6 @@ public class Utils {
         return new Neighborhood(nMissingArray, nImgArray);
     }
 
-//    private static double matAverage(MatOfDouble m, Index[] idxs) { // todo - delete this
-//        double sum = 0.0;
-//        for (Index idx: idxs) {
-//            sum += m.get(idx.getRow(), idx.getCol())[0];
-//        }
-//        return sum / idxs.length;
-//    }
-
     /**
      * given anm array of locations of pixels which are in the boundaries of a hole,
      * sets a line in this boundary in the matrix (to visualize the hole's boundaries)
@@ -273,5 +354,4 @@ public class Utils {
         dstImg.getRaster().setDataElements(0, 0, m.cols(), m.rows(), dstData);
         return dstImg;
     }
-
 }

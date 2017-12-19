@@ -19,18 +19,14 @@ public class Defs {
     // if 1 approximating algorithm (section 5) will run
     public static int ALG = 0;
 
-    // if true, runs a routine in which an image which assumed to have no hole is loaded, set with a mock hole,
-    // which is later filled.
-    // if false, an image which possibly contains a hole is loaded, and filled by the same algorithm
-    public static boolean MOCK_MODE = true;
-    
-    public static int MOCK_HOLE_START_ROW = 100;
-    public static int MOCK_HOLE_START_COL = 50;
-    public static int MOCK_HOLE_HEIGHT = 50;
-    public static int MOCK_HOLE_WIDTH = 100;
+    public static int MOCK_HOLE_START_ROW = 120;
+    public static int MOCK_HOLE_START_COL = 200;
+    public static int MOCK_HOLE_HEIGHT = 10;
+    public static int MOCK_HOLE_WIDTH = 10;
 
     // file system paths, and output file names
     public static String PROJECT_PATH = System.getProperty("user.dir");
+    public final static String INPUT_IMAGE_NAME_DEF = "example_input_img.jpg";
     public static String INPUT_IMG_PATH;
     public static String OUTPUT_IMGS_DIR = "outputImgs";
     public final static String INPUT_GRAYSCALE_IMG_NAME = "inputGrayscaleImg";
@@ -42,7 +38,5 @@ public class Defs {
     public final static String CMD_LINE_ARG_DEF = "[default]";
 
     // uses to iterate over a pixel's neighboring pixels. see usage at Utils.checkNeighborhood()
-    public final static int[][] clockWise = new int[][] {{-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}};
-//    public final static int[][] clockWise = new int[][] {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
-//            {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    public final static int[][] clockWise = new int[][] {{0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
 }

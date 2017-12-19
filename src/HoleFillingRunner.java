@@ -1,5 +1,4 @@
 import org.opencv.core.*;
-
 import java.io.File;
 import java.nio.file.Paths;
 
@@ -7,39 +6,6 @@ import java.nio.file.Paths;
  * runner class for the task's routines
  */
 public class HoleFillingRunner {
-
-    /**
-     * parsing command line arguments to Defs, e.g input image path, epsilon and z as they are defined in the task, ext.
-     * @param args String[] normally args array as it's given from main method
-     * @throws Exception in case that there was no input image path given as command line argument
-     */
-    private static void parseAgrs(String[] args) throws Exception {
-        Defs.INPUT_IMG_PATH = args[0].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.INPUT_IMG_PATH : args[0];
-        if (Defs.INPUT_IMG_PATH == null) {
-            throw new ImagePathException("You must specify image path, e.g: -Dimg=imgs\\img1 (absolute path " +
-                    "also permitted), aborting ...");
-        }
-
-        Defs.ALG = args[1].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.ALG : Integer.parseInt(args[1]);
-        Defs.Z = args[2].equals(Defs.CMD_LINE_ARG_DEF) ? (Defs.ALG == 0 ? Defs.Z_DEF : Defs.Z_CIRC_DEF)
-                : Integer.parseInt(args[2]);
-        Defs.EPSILON = args[3].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.EPSILON : Double.parseDouble(args[3]);
-        Defs.TEST_MODE = args[4].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.TEST_MODE : Boolean.parseBoolean(args[4]);
-        Defs.MOCK_MODE = args[5].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.MOCK_MODE : Boolean.parseBoolean(args[5]);
-
-        String s = args[6].equals(Defs.CMD_LINE_ARG_DEF) ? null : args[6];
-        if (s != null) {
-            String [] stringData = s.split(" ");
-            int[] intData = new int[stringData.length];
-            for (int i = 0; i < stringData.length; i++) {
-                intData[i] = Integer.parseInt(stringData[i]);
-            }
-            Defs.MOCK_HOLE_START_ROW = intData[0];
-            Defs.MOCK_HOLE_HEIGHT = intData[1];
-            Defs.MOCK_HOLE_START_COL = intData[2];
-            Defs.MOCK_HOLE_WIDTH = intData[3];
-        }
-    }
 
     public static void main(String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -51,28 +17,18 @@ public class HoleFillingRunner {
             return;
         }
 
-        if (Defs.MOCK_MODE) {
-            System.out.format("mock hole start row = %d%n", Defs.MOCK_HOLE_START_ROW);
-            System.out.format("mock hole height = %d%n", Defs.MOCK_HOLE_HEIGHT);
-            System.out.format("mock hole start col = %d%n", Defs.MOCK_HOLE_START_COL);
-            System.out.format("mock hole width = %d%n", Defs.MOCK_HOLE_WIDTH);
-            runMockHoleFilling();
-        } else {
-            runRealHoleFilling();
-        }
+        logMockHoleInfo();
+
+        runMockHoleFilling();
 
         System.out.println("Done ...");
     }
 
-    /**
-     * creates a directory under the project's base path, called outputImages, in which the images created by the
-     * algorithm will be created
-     */
-    private static void createOutputImgsDir() {
-        File dir = new File(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR).toString());
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
+    private static void logMockHoleInfo() {
+        System.out.format("mock hole start row = %d%n", Defs.MOCK_HOLE_START_ROW);
+        System.out.format("mock hole height = %d%n", Defs.MOCK_HOLE_HEIGHT);
+        System.out.format("mock hole start col = %d%n", Defs.MOCK_HOLE_START_COL);
+        System.out.format("mock hole width = %d%n", Defs.MOCK_HOLE_WIDTH);
     }
 
     /**
@@ -108,7 +64,7 @@ public class HoleFillingRunner {
         Index[] missingPixels = MockUtils.getMockSquareHole(new Index(Defs.MOCK_HOLE_START_ROW,
                         Defs.MOCK_HOLE_START_COL), Defs.MOCK_HOLE_HEIGHT, Defs.MOCK_HOLE_WIDTH);
         MockUtils.setMockHole(hf.getMat(), missingPixels);
-        hf.setHole(Utils.getHoleBoundaries(hf.getMat()));
+        hf.setHole(Utils.findHole(hf.getMat()));
 
         if (Defs.TEST_MODE) {
             // logs average of pixels in the locations which were set as the mock hole,
@@ -134,15 +90,14 @@ public class HoleFillingRunner {
         // load the input image again, set our mock hole, and fill it according to the chosen algorithm
         HoleFiller hf3 = new HoleFiller(Defs.INPUT_IMG_PATH);
         MockUtils.setMockHole(hf3.getMat(), missingPixels);
-        hf3.setHole(Utils.getHoleBoundaries(hf3.getMat()));
+        hf3.setHole(Utils.findHole(hf3.getMat()));
 
+        // fill the hole
         if (Defs.ALG == 0) {
             Utils.fillHole(hf3.getMat(), hf3.getHole(), Defs.Z, Defs.EPSILON);
         } else if (Defs.ALG == 1) {
-//            HashSet<Index> boundariesSet = new HashSet<>(Arrays.asList(hf3.getHole().getBoundariesPixels()));
-//            hf3.getHole().setBoundariesSet(boundariesSet);
-//            Utils.fillHoleCircular(hf3.getScaledMat(), hf3.getHole(), 0.5);
-            Utils.fillHoleCircular(hf3.getMat(), hf3.getHole());
+            Index[] b = Utils.followHolePerimeter(hf3.getMat());
+            Utils.fillHoleCircular(hf3.getMat(), b);
         }
 
         if (Defs.TEST_MODE) {
@@ -171,63 +126,42 @@ public class HoleFillingRunner {
         hf3.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.FINAL_FILLED_IMG_NAME).toString());
     }
 
-    private static void runRealHoleFilling() {
-        // load color rgb image, coverts in to grayscale, and saves it in outputImgs folder
-        HoleFiller hf = new HoleFiller(Defs.INPUT_IMG_PATH);
-        Mat outputMat = new Mat();
-        hf.getMat().convertTo(outputMat, CvType.CV_8UC1);
-        hf.setImg(Utils.matToImg(outputMat));
+    /**
+     * parsing command line arguments to Defs, e.g input image path, epsilon and z as they are defined in the task, ext.
+     * @param args String[] normally args array as it's given from main method
+     */
+    private static void parseAgrs(String[] args) {
+        Defs.INPUT_IMG_PATH = args[0].equals(Defs.CMD_LINE_ARG_DEF) ?
+                Paths.get(Defs.PROJECT_PATH, Defs.INPUT_IMAGE_NAME_DEF).toString() : args[0];
 
-        createOutputImgsDir();
+        Defs.ALG = args[1].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.ALG : Integer.parseInt(args[1]);
+        Defs.Z = args[2].equals(Defs.CMD_LINE_ARG_DEF) ? (Defs.ALG == 0 ? Defs.Z_DEF : Defs.Z_CIRC_DEF)
+                : Integer.parseInt(args[2]);
+        Defs.EPSILON = args[3].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.EPSILON : Double.parseDouble(args[3]);
+        Defs.TEST_MODE = args[4].equals(Defs.CMD_LINE_ARG_DEF) ? Defs.TEST_MODE : Boolean.parseBoolean(args[4]);
 
-        hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.INPUT_GRAYSCALE_IMG_NAME).toString());
-
-        // find missing pixels, and boundary pixels, of the hole
-        Hole hole = Utils.getHoleBoundaries(hf.getMat());
-        hf.setHole(hole);
-
-        // fill the hole
-        if (Defs.ALG == 0) {
-            Utils.fillHole(hf.getMat(), hf.getHole(), Defs.Z, Defs.EPSILON);
-        } else if (Defs.ALG == 1) {
-            Utils.fillHoleCircular(hf.getMat(), hf.getHole());
-        }
-
-        // visualize the hole's boundaries in the final image
-        Utils.setVisualBoundaries(hf.getMat(), hf.getHole().getBoundariesPixels(), 0.0);
-
-        // output the final image with filling and boundaries
-        hf.getMat().convertTo(outputMat, CvType.CV_8UC1);
-        hf.setImg(Utils.matToImg(outputMat));
-        hf.writeImg(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR, Defs.FINAL_FILLED_IMG_NAME).toString());
-    }
-
-    public static void testFillMatrix() {
-        Mat m = new Mat(4,4, CvType.CV_8UC1);
-        MatOfDouble md = new MatOfDouble();
-        m.convertTo(md, CvType.CV_64FC1);
-
-        for (int j = 0; j < md.cols(); j++) {
-            md.put(0, j, 0.9);
-            md.put(3, j, 0.1);
-        }
-        for (int i = 1; i < md.rows() - 1; i++) {
-            md.put(i, 0, 0.2);
-            md.put(i, 3, 0.2);
-        }
-        for (int i = 1; i < md.rows() - 1; i++) {
-            for (int j = 1; j < md.cols() - 1; j++) {
-                md.put(i, j, Defs.HOLE_VALUE);
+        String s = args[5].equals(Defs.CMD_LINE_ARG_DEF) ? null : args[5];
+        if (s != null) {
+            String [] stringData = s.split(" ");
+            int[] intData = new int[stringData.length];
+            for (int i = 0; i < stringData.length; i++) {
+                intData[i] = Integer.parseInt(stringData[i]);
             }
+            Defs.MOCK_HOLE_START_ROW = intData[0];
+            Defs.MOCK_HOLE_HEIGHT = intData[1];
+            Defs.MOCK_HOLE_START_COL = intData[2];
+            Defs.MOCK_HOLE_WIDTH = intData[3];
         }
-        System.out.println("Matrix with hole:");
-        System.out.println(md.dump());
-
-        Hole hole  = Utils.getHoleBoundaries(md);
-
-        Utils.fillHoleCircular(md, hole);
-        System.out.println("Matrix after filling:");
-        System.out.println(md.dump());
     }
 
+    /**
+     * creates a directory under the project's base path, called outputImages, in which the images created by the
+     * algorithm will be created
+     */
+    private static void createOutputImgsDir() {
+        File dir = new File(Paths.get(Defs.PROJECT_PATH, Defs.OUTPUT_IMGS_DIR).toString());
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+    }
 }

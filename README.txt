@@ -15,16 +15,16 @@ The values which are in the examples are the values taken from my OS
 ### USAGE - run the program ###
 To build and run the program, just hit:
 
-ant -Dimg='absolutePath/to/inputImage'
+ant <optional args>
 
 from the same location as the build.xml file
 
 To just run the program, without building it, add the word run, e.g:
 
--Dimg='absolutePath/to/inputImage' run
+ant <optional args> run
 
-The argument -Dimg is the path to the input image, so the program can't run without it.
-But there are more optional configurable command line arguments you can use:
+-Dimgpath='absolute\path\to\input\img'
+If you the argument -Dimgpath will not be given, the example_input_img.jpg under the projects base dir will be used
 
 -Dalg=0 will run the algorithm from section 2, -Dalg=1 will run the approximating one from section 5
 
@@ -57,7 +57,7 @@ I chose to implement a class which holds the input image, and helps us manipulat
 The methods which are required in the task itself, and more helper methods I used, are in the class Utils:
 
 For implementation of section 1 see:
-public static Hole getHoleBoundaries(Mat m)
+public static Hole findHole(Mat m)
 
 For implementation of the algorithm from section 2 see:
 Utils.public static void fillHole(MatOfDouble m, Hole hole, int z, double eps)
@@ -86,4 +86,8 @@ If we assume that the hole is a circle, then it's perimeter (boundary) will cont
 pixels, and so it will also run at O(n^1.5).
 
 ## Section 5 ##
-todo fill this after finished
+
+for this section I implemented an approximating algorithm which fills the outmost perimeter of missing pixels first,
+and then goes to the inner perimeter, until all pixels are filled.
+To fill eac pixel, I consider the average of the pixels which aren't missing, only from the neighborhood of this pixel.
+This way, we obtain O(n) runtime.

@@ -3,14 +3,37 @@
   <component name="ChangeListManager">
     <list default="true" id="f4b72963-9d26-49a3-934a-5e5bc8b0d89b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/README" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
       <change beforePath="$PROJECT_DIR$/build/classes/Defs.class" afterPath="$PROJECT_DIR$/build/classes/Defs.class" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Hole.class" afterPath="$PROJECT_DIR$/build/classes/Hole.class" />
       <change beforePath="$PROJECT_DIR$/build/classes/HoleFillingRunner.class" afterPath="$PROJECT_DIR$/build/classes/HoleFillingRunner.class" />
+      <change beforePath="$PROJECT_DIR$/build/classes/ImagePathException.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Index.class" afterPath="$PROJECT_DIR$/build/classes/Index.class" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Utils.class" afterPath="$PROJECT_DIR$/build/classes/Utils.class" />
       <change beforePath="$PROJECT_DIR$/build/jar/HoleFillingRunner.jar" afterPath="$PROJECT_DIR$/build/jar/HoleFillingRunner.jar" />
-      <change beforePath="$PROJECT_DIR$/outputImgs/boundaryVisualized.jpg" afterPath="$PROJECT_DIR$/outputImgs/boundaryVisualized.jpg" />
-      <change beforePath="$PROJECT_DIR$/outputImgs/finalFilledImg.jpg" afterPath="$PROJECT_DIR$/outputImgs/finalFilledImg.jpg" />
+      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/Defs.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/Defs.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/Hole.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/Hole.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/HoleFiller.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/HoleFiller.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/HoleFillingRunner.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/HoleFillingRunner.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/Index.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/Index.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/LightricksTask/Utils.class" afterPath="$PROJECT_DIR$/out/production/LightricksTask/Utils.class" />
+      <change beforePath="$PROJECT_DIR$/outputImgs/boundaryVisualized.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/outputImgs/finalFilledImg.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/outputImgs/inputGrayscaleImg.jpg" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/Defs.java" afterPath="$PROJECT_DIR$/src/Defs.java" />
+      <change beforePath="$PROJECT_DIR$/src/Hole.java" afterPath="$PROJECT_DIR$/src/Hole.java" />
       <change beforePath="$PROJECT_DIR$/src/HoleFillingRunner.java" afterPath="$PROJECT_DIR$/src/HoleFillingRunner.java" />
+      <change beforePath="$PROJECT_DIR$/src/ImagePathException.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Index.java" afterPath="$PROJECT_DIR$/src/Index.java" />
+      <change beforePath="$PROJECT_DIR$/src/Lenna.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/README" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/Utils.java" afterPath="$PROJECT_DIR$/src/Utils.java" />
+      <change beforePath="$PROJECT_DIR$/src/img.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/toSave/circularAlg/finalFilledImg-withfactor05.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/toSave/suggestedAlg/filled_img.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/toSave/suggestedAlg/img_input.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/toSave/suggestedAlg/img_with_boundaries.jpg" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +51,8 @@
       <file leaf-file-name="HoleFillingRunner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HoleFillingRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="36" column="28" lean-forward="false" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+            <state relative-caret-position="297">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,8 +63,18 @@
       <file leaf-file-name="build.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="43" />
+            <state relative-caret-position="331">
+              <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="28" column="39" lean-forward="false" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -50,8 +83,8 @@
       <file leaf-file-name="HoleFiller.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HoleFiller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2640">
-              <caret line="91" column="26" lean-forward="false" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
+            <state relative-caret-position="-1432">
+              <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2693#2694#0" expanded="true" />
@@ -74,21 +107,17 @@
       <file leaf-file-name="Hole.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Hole.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#365#366#0" expanded="true" />
-                <element signature="e#404#405#0" expanded="true" />
-                <element signature="e#445#446#0" expanded="true" />
-                <element signature="e#481#482#0" expanded="true" />
-                <element signature="e#529#530#0" expanded="true" />
-                <element signature="e#565#566#0" expanded="true" />
-                <element signature="e#612#613#0" expanded="true" />
-                <element signature="e#645#646#0" expanded="true" />
-                <element signature="e#695#696#0" expanded="true" />
-                <element signature="e#731#732#0" expanded="true" />
-                <element signature="e#786#787#0" expanded="true" />
-                <element signature="e#820#821#0" expanded="true" />
+                <element signature="e#296#297#0" expanded="true" />
+                <element signature="e#335#336#0" expanded="true" />
+                <element signature="e#376#377#0" expanded="true" />
+                <element signature="e#412#413#0" expanded="true" />
+                <element signature="e#459#460#0" expanded="true" />
+                <element signature="e#492#493#0" expanded="true" />
+                <element signature="e#542#543#0" expanded="true" />
+                <element signature="e#578#579#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,19 +126,45 @@
       <file leaf-file-name="Index.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-269">
-              <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            <state relative-caret-position="325">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
-                <element signature="e#487#488#0" expanded="true" />
-                <element signature="e#519#520#0" expanded="true" />
-                <element signature="e#546#547#0" expanded="true" />
-                <element signature="e#572#573#0" expanded="true" />
-                <element signature="e#599#600#0" expanded="true" />
-                <element signature="e#625#626#0" expanded="true" />
-                <element signature="e#658#659#0" expanded="true" />
-                <element signature="e#681#682#0" expanded="true" />
-                <element signature="e#714#715#0" expanded="true" />
-                <element signature="e#737#738#0" expanded="true" />
+                <element signature="e#418#419#0" expanded="true" />
+                <element signature="e#450#451#0" expanded="true" />
+                <element signature="e#496#497#0" expanded="true" />
+                <element signature="e#583#584#0" expanded="true" />
+                <element signature="e#610#611#0" expanded="true" />
+                <element signature="e#636#637#0" expanded="true" />
+                <element signature="e#663#664#0" expanded="true" />
+                <element signature="e#689#690#0" expanded="true" />
+                <element signature="e#722#723#0" expanded="true" />
+                <element signature="e#745#746#0" expanded="true" />
+                <element signature="e#778#779#0" expanded="true" />
+                <element signature="e#801#802#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Utils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MockUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MockUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="28" column="43" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,8 +173,8 @@
       <file leaf-file-name="Neighborhood.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Neighborhood.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="175">
+              <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
               <folding>
                 <element signature="e#318#319#0" expanded="true" />
                 <element signature="e#354#355#0" expanded="true" />
@@ -128,45 +183,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Utils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2272">
-              <caret line="193" column="78" lean-forward="false" selection-start-line="193" selection-start-column="78" selection-end-line="193" selection-end-column="78" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1888">
-              <caret line="88" column="4" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MockUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MockUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Defs.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Defs.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Defs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-114">
-              <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+            <state relative-caret-position="672">
+              <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -183,36 +204,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fillHole</find>
-      <find>defs.z</find>
-      <find>getcir</find>
-      <find>arraylis</find>
-      <find>circu</find>
-      <find>fac</find>
-      <find>2)</find>
-      <find>array</find>
-      <find>getMockSquareHole</find>
+      <find>new</find>
+      <find>defs.alg</find>
+      <find>circular</find>
+      <find>checkNeighborhood</find>
+      <find>testfo</find>
+      <find>runmock</find>
+      <find>directions</find>
+      <find>dire</find>
+      <find>testFollowBoarder</find>
+      <find>runRealHoleFilling</find>
+      <find>fillHoleCircular1</find>
+      <find>follo</find>
+      <find>followHolePerimeter</find>
+      <find>fillhole</find>
+      <find>getpixel</find>
+      <find>fillMissingPixel</find>
+      <find>circulat</find>
+      <find>ssing pixels leng</find>
+      <find>mock</find>
+      <find>parse</find>
+      <find>oundaries</find>
+      <find>findH</find>
+      <find>getHoleBoundaries</find>
+      <find>findhole</find>
+      <find>findHole</find>
       <find>fillHoleCircular</find>
-      <find>m.put(</find>
-      <find>m.put(missingIdx.getRow(), missingIdx.getCol(), p);</find>
-      <find>fillH</find>
-      <find>getH</find>
-      <find>CV</find>
-      <find>.convertTo(</find>
-      <find>.convertTo</find>
-      <find>scale</find>
-      <find>1.0</find>
-      <find>System</find>
-      <find>scale</find>
-      <find>Dscal</find>
-      <find>todo</find>
-      <find>done</find>
-      <find>getBound</find>
-      <find>getBoundri</find>
-      <find>Boundaries(</find>
-      <find>checkMissingPixel</find>
-      <find>checkb</find>
-      <find>EPS</find>
+      <find>checkNei</find>
+      <find>IMG</find>
+      <find>imgp</find>
+      <find>throwss</find>
     </findStrings>
     <replaceStrings>
       <replace>srcImg</replace>
@@ -228,8 +249,9 @@
       <replace>.getMissingPixels()</replace>
       <replace>.getMat()</replace>
       <replace>boundaries</replace>
-      <replace>getMat</replace>
       <replace>m.</replace>
+      <replace>getMat</replace>
+      <replace>findHole</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -254,17 +276,19 @@
         <option value="$PROJECT_DIR$/src/utils/Index.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/build.xml" />
-        <option value="$PROJECT_DIR$/src/Index.java" />
-        <option value="$PROJECT_DIR$/src/Neighborhood.java" />
         <option value="$PROJECT_DIR$/src/ImagePathException.java" />
-        <option value="$PROJECT_DIR$/src/MockUtils.java" />
-        <option value="$PROJECT_DIR$/src/Hole.java" />
-        <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/src/HoleFiller.java" />
-        <option value="$PROJECT_DIR$/src/Utils.java" />
-        <option value="$PROJECT_DIR$/src/HoleFillingRunner.java" />
+        <option value="$PROJECT_DIR$/src/MockUtils.java" />
+        <option value="$PROJECT_DIR$/src/Neighborhood.java" />
+        <option value="$PROJECT_DIR$/mat.txt" />
+        <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/src/Defs.java" />
+        <option value="$PROJECT_DIR$/README.txt" />
+        <option value="$PROJECT_DIR$/src/HoleFillingRunner.java" />
+        <option value="$PROJECT_DIR$/src/Utils.java" />
+        <option value="$PROJECT_DIR$/src/Hole.java" />
+        <option value="$PROJECT_DIR$/src/Index.java" />
       </list>
     </option>
   </component>
@@ -275,7 +299,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+    <option name="x" value="950" />
     <option name="width" value="980" />
     <option name="height" value="1030" />
   </component>
@@ -479,12 +503,12 @@
       <workItem from="1513239349824" duration="9160000" />
       <workItem from="1513261477635" duration="40395000" />
       <workItem from="1513497518753" duration="10062000" />
-      <workItem from="1513508432731" duration="37015000" />
+      <workItem from="1513508432731" duration="77167000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115613000" />
+    <option name="totallyTimeSpent" value="155765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -499,19 +523,19 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51834863" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31766054" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1625" sideWeight="0.4945055" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26490825" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24426605" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1625" sideWeight="0.50549453" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26834863" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16857798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -527,29 +551,33 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/HoleFillingRunner.java</url>
-          <line>44</line>
-          <properties />
-          <option name="timeStamp" value="117" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="118" />
+      <option name="time" value="137" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="neighborhood.boundaryPixels" language="JAVA" />
         <watch expression="p" language="JAVA" />
+        <watch expression="n.getMissingPixels().length" language="JAVA" />
+        <watch expression="n.getMissingPixels()[0]" language="JAVA" />
+        <watch expression="n.getMissingPixels()[i]" language="JAVA" />
         <watch expression="m.get(101,99)[0]" language="JAVA" />
         <watch expression="hole.getBoundariesPixels()[0]" language="JAVA" />
+        <watch expression="nextPerimeter" language="JAVA" />
+        <watch expression="currPerimeter.length" language="JAVA" />
+        <watch expression="nextPerimeter.contains(new Index(8, 38))" language="JAVA" />
+        <watch expression="p" language="JAVA" />
+        <watch expression="m.get(i, j)[0]" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>hole.getBoundariesPixels()[0]</expression-string>
+        <expression-string>m.get(i, j)[0]</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>nextPerimeter.contains(new Index(8, 38))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -559,42 +587,37 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>neighborhood.boundaryPixels</expression-string>
+        <expression-string>currPerimeter.contains(new Index(8, 38))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>m.get(101,99)[0]</expression-string>
+        <expression-string>currPerimeter.length</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>m.get(101,98)[0]</expression-string>
+        <expression-string>nextPerimeter</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>m.get(101,97)[0]</expression-string>
+        <expression-string>currPerimeter</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>m.get(100,99)[0]</expression-string>
+        <expression-string>n.getMissingPixels()[i]</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>m.get(100,97)[0]</expression-string>
+        <expression-string>n.getMissingPixels()[0]</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>neighborhood.missingPixels</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>neighborhood.imgPixels</expression-string>
+        <expression-string>n.getMissingPixels().length</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -654,18 +677,14 @@
         <state relative-caret-position="225">
           <caret line="9" column="42" lean-forward="false" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
           <folding>
-            <element signature="e#365#366#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#529#530#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#612#613#0" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#786#787#0" expanded="true" />
-            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+            <element signature="e#459#460#0" expanded="true" />
+            <element signature="e#492#493#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -675,16 +694,18 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#572#573#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#658#659#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#583#584#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#722#723#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#801#802#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -754,18 +775,14 @@
         <state relative-caret-position="275">
           <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
           <folding>
-            <element signature="e#365#366#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#529#530#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#612#613#0" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#786#787#0" expanded="true" />
-            <element signature="e#820#821#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+            <element signature="e#459#460#0" expanded="true" />
+            <element signature="e#492#493#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -793,16 +810,18 @@
         <state relative-caret-position="275">
           <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="18" />
           <folding>
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#572#573#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#658#659#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#583#584#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#722#723#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#801#802#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -830,16 +849,18 @@
         <state relative-caret-position="550">
           <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
           <folding>
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#572#573#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#658#659#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#583#584#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#722#723#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#801#802#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -957,94 +978,90 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="58" lean-forward="false" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.1/lib/src.zip!/java.base/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="244" column="18" lean-forward="false" selection-start-line="244" selection-start-column="18" selection-end-line="244" selection-end-column="18" />
           <folding>
-            <element signature="e#291#292#0" expanded="false" />
-            <element signature="e#317#318#0" expanded="false" />
+            <element signature="e#10225#10226#0" expanded="false" />
+            <element signature="e#10308#10309#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Index.java">
+    <entry file="jar://C:/opencv/build/java/opencv-331.jar!/org/opencv/core/MatOfDouble.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-269">
-          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-          <folding>
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#572#573#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#658#659#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="100">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Neighborhood.java">
+    <entry file="file://$PROJECT_DIR$/mat.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-          <folding>
-            <element signature="e#318#319#0" expanded="true" />
-            <element signature="e#354#355#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MockUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="13" column="23" lean-forward="false" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Hole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-          <folding>
-            <element signature="e#365#366#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#529#530#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#612#613#0" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#786#787#0" expanded="true" />
-            <element signature="e#820#821#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="43" />
+        <state relative-caret-position="84">
+          <caret line="4" column="44" lean-forward="false" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1888">
-          <caret line="88" column="4" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="4" />
+        <state relative-caret-position="270">
+          <caret line="9" column="30" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="28" column="39" lean-forward="false" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Defs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Hole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+            <element signature="e#459#460#0" expanded="true" />
+            <element signature="e#492#493#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/HoleFiller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2640">
-          <caret line="91" column="26" lean-forward="false" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
+        <state relative-caret-position="-1432">
+          <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2693#2694#0" expanded="true" />
@@ -1063,31 +1080,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2272">
-          <caret line="193" column="78" lean-forward="false" selection-start-line="193" selection-start-column="78" selection-end-line="193" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HoleFillingRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="36" column="28" lean-forward="false" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+        <state relative-caret-position="297">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Defs.java">
+    <entry file="file://$PROJECT_DIR$/src/Index.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="325">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#583#584#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#722#723#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#801#802#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MockUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="28" column="43" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Neighborhood.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+          <folding>
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -43,12 +43,6 @@
         </not>
     </condition>
 
-    <condition property="mock" value="[default]">
-        <not>
-            <isset property="mock"/>
-        </not>
-    </condition>
-
     <condition property="mockhole" value="[default]">
         <not>
             <isset property="mockhole"/>
@@ -85,7 +79,6 @@
         <arg value="${z}"/>
         <arg value="${eps}"/>
         <arg value="${test}"/>
-        <arg value="${mock}"/>
         <arg value="${mockhole}"/>
         </java>
     </target>
