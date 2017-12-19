@@ -1,9 +1,9 @@
 ### USAGE - environment ###
 to run the program you must have OpenCV and Ant installed.
 
-Please Configure the following paths in the file LightricksTask\build.xml file:
+Please Configure the following paths in the file HoleFilling\build.xml file:
 
-Set the path to your OpenCv .jar file at line 5 (in the property value):
+Set the path to your OpenCv .jar file at line 5:
 <property name="lib.dir" value="C:\opencv\build\java"/>
 
 Set the path to your OpenCv native library at line 84:
@@ -23,6 +23,8 @@ To just run the program, without building it, add the word run, e.g:
 
 ant <optional args> run
 
+Optional command line args:
+
 -Dimgpath='absolute\path\to\input\img'
 If you the argument -Dimgpath will not be given, the example_input_img.jpg under the projects base dir will be used
 
@@ -38,19 +40,15 @@ e.g the average value of the the missing pixels after they where filled,
 and the average of the pixels in the boundaries. We expect these average to be close.
 the default value for Dtest is false, meaning no logs will be printed
 
--Dmock=true will cause the program to assume that there is no hole in the given
-input image, and will set a mock hole in it
-the default value is true, to run the program with an image which has a real hole, give: -Dmock=false
-
 -Dmockhole will, in case that -Dmock=true , configure the position of the mock hole;
 -Dmockhole=<'topmostRow height leftmostCol width'>
 there are default values for the mockhole in case it's not given in command line
 
-The program's output will be created under LightricksTask\outputImages
+The program's output will be created under HoleFilling\outputImages
 
 ### Design and more ###
 I used java and OpenCV for this task, using OpenCV only to load and output images, and in the Mat, MatOfDouble object
-instead of 2-dims arrays. Of course, I haven't used any "smart" methods these object have.
+instead of 2-dims arrays. Of course, I haven't used any "smart" methods these object offer, to manipulate the image.
 
 I chose to implement a class which holds the input image, and helps us manipulate it easily - HoleFiller
 
@@ -79,8 +77,8 @@ in matrix, and more classes to represent objects, such as Index, Neighborhood, e
 The basic algorithm goes through all pixels in the hole (n) and for each one, calculates the weights function based on
 all pixels in the boundaries (m), therefore it will run in O(n*m).
 
-If we assume that the hole is a square, we get that it's sqrt(n) x sqrt(n) square, which has 4 * sqrt(n) pixels in it's
-boundaries. So we get that it will run at O(n^1.5).
+If we assume that the hole is a square, we get that it's a [sqrt(n) x sqrt(n)] square, which has 4*sqrt(n) pixels in
+it's boundaries. So we get runtime of O(n^1.5).
 
 If we assume that the hole is a circle, then it's perimeter (boundary) will contain 2*pi*sqrt(pi*n) = 2*pi^1.5*sqrt(n)
 pixels, and so it will also run at O(n^1.5).
@@ -88,6 +86,6 @@ pixels, and so it will also run at O(n^1.5).
 ## Section 5 ##
 
 for this section I implemented an approximating algorithm which fills the outmost perimeter of missing pixels first,
-and then goes to the inner perimeter, until all pixels are filled.
-To fill eac pixel, I consider the average of the pixels which aren't missing, only from the neighborhood of this pixel.
-This way, we obtain O(n) runtime.
+and then goes to the inner perimeter, and so on, until all missing pixels are filled.
+To fill each pixel, the algorithm considers the average of the pixels which aren't missing,
+only from the neighborhood of this pixel. This way, we obtain O(n) runtime.
